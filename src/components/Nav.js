@@ -1,13 +1,10 @@
 import React, {useContext} from 'react'
 import { useDispatch } from 'react-redux'
 import { Row, Col, Affix  } from 'antd'
-import { useRouter } from 'next/router'
-import localStorage from 'localStorage'
-import MyContext from '~/components/MyContext'
+//import router from 'react-router'
 
 import _ from 'lodash'
 import { Menu, Dropdown } from 'antd'
-import Link from 'next/link'
 import { UnorderedListOutlined } from '@ant-design/icons';
 
 
@@ -24,9 +21,7 @@ const Nav = () => {
       <ul className="nav navbar-nav">
         {defaultMenus.map(({ href, label }) => (
           <li className="mega-menu" key={href}>
-            <Link href={href}>
-              <a className="underline">{label}</a>
-            </Link>
+            <a href={href} className="underline">{label}</a>
           </li>
         ))}
         <style jsx>
@@ -99,7 +94,7 @@ const Nav = () => {
       <nav >
         <Row style={{ lineHeight: '8vh', backgroundColor: '#fff' }}>
           <Col xs={{ span: 10, push: 2 }} xl={{ span: 6, push: 4 }}>
-            <span className="title FS-16 ML-8"  onClick={() => router.push('/')}>AlenZhang's Blog</span>
+            <span className="title FS-16 ML-8"  onClick={() => console.info("shi") }>AlenZhang's Blog</span>
           </Col>
           <Col xs={{ span: 8, push: 8 }} xl={{ span: 6, push: 10 }} >
             {menuList()}
