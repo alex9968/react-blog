@@ -17,6 +17,7 @@ const HttpState = {
 }
 
 const initialState = I.fromJS({
+  message: '',
   chatHistory: {},
   signupDialogOpen: false,
   loader: {

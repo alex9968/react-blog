@@ -1,16 +1,10 @@
-import React, {useContext} from 'react'
-import { useDispatch } from 'react-redux'
-import { Row, Col, Affix  } from 'antd'
-//import router from 'react-router'
-
-import _ from 'lodash'
-import { Menu, Dropdown } from 'antd'
-import { UnorderedListOutlined } from '@ant-design/icons';
-
+import React from 'react'
+import { Row, Col, Menu, Dropdown } from 'antd'
+//import { Link,  BrowserRouter as Router,Route} from 'react-router-dom';
 
 const Nav = () => {
   const defaultMenus = [
-    { href: '/', label: 'HOME' },
+    { href: '/index', label: 'HOME' },
     { href: '/project', label: 'PROJECTS' },
     { href: '/chat', label: 'CHAT-ROOM' },
     { href: '/about', label:'ABOUT'}
@@ -19,13 +13,13 @@ const Nav = () => {
   const menuList = () => {
     return (
       <ul className="nav navbar-nav">
-        {defaultMenus.map(({ href, label }) => (
-          <li className="mega-menu" key={href}>
-            <a href={href} className="underline">{label}</a>
-          </li>
-        ))}
-        <style jsx>
-          {`
+          {defaultMenus.map(({ href, label }) => (
+            <li className="mega-menu" key={href}>
+                <a href={href}  className="underline">{label}</a>
+            </li>
+          ))}
+          <style jsx>
+            {`
           .navbar-nav > li {
             float: left;
           }
@@ -84,7 +78,7 @@ const Nav = () => {
             transform-origin: left;
           }
         `}
-        </style>
+          </style>
       </ul>
     )
   }
