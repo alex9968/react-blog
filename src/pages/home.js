@@ -16,9 +16,9 @@ const Home = () => {
   })
 
   return (
-    <div className="App">
-      <Row style={{  }}>
-        Homeshhhhhh
+    <div style={{ }}>
+        <Row style={{  }}>
+        Homomeshhhhhomeshhhhhomeshhhhhomeshhhhhomeshhhhhomeshhhhheshhhhhomeshhhhhh
       </Row>
     </div>
   );

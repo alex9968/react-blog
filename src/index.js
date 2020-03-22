@@ -5,6 +5,7 @@ import { BrowserRouter as Router,Route} from 'react-router-dom';
 import { Switch, Redirect } from 'react-router-dom';
 import { createHashHistory  } from 'history'
 import createStore from './redux/createStore'
+import { Col } from 'antd'
 
 import Nav from './components/Nav';
 import Foot from './components/Foot';
@@ -22,18 +23,22 @@ ReactDOM.render(
   <div>
     <ReduxProvider store={store}>
       <Nav />
-      <Router>
-        <Switch>
-          <Redirect path="/" exact={true} to="/index" />
-          <Route path="/index" component={Home} exact/>
-          <Route path="/chat" component={Chat} />
-          <Route path="/about" component={About} />
-          <Route path="/project" component={Project} />
-        </Switch>
-      </Router>
+      <div style={{ minHeight: '83vh' }}>
+        <Col xs={{span: 22,push:1}} md={{span: 20, push:2}} xl={{ span: 12, push:6 }} style={{ border:'1px solid red' }} >
+          <Router>
+            <Switch>
+              <Redirect path="/" exact={true} to="/index" />
+              <Route path="/index" component={Home} exact/>
+              <Route path="/chat" component={Chat} />
+              <Route path="/about" component={About} />
+              <Route path="/project" component={Project} />
+            </Switch>
+          </Router>
+        </Col>
+      </div>
       <Foot />
-    </ReduxProvider>
-  </div>,
+      </ReduxProvider>
+    </div>,
   document.getElementById('root')
 );
 

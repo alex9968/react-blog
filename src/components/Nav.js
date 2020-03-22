@@ -86,11 +86,13 @@ const Nav = () => {
   return (
     <div>
       <nav >
-        <Row style={{ lineHeight: '8vh', backgroundColor: '#fff' }}>
-          <Col xs={{ span: 10, push: 2 }} xl={{ span: 6, push: 4 }}>
-            <span className="title FS-16 ML-8"  onClick={() => console.info("shi") }>AlenZhang's Blog</span>
+        <Row type="flex" justfiy="center" style={{ lineHeight: '8vh', backgroundColor: '#fff' }}>
+          <Col xs={{span: 16,push:4}} md={{ span:10, push:3 }}  xl={{ span: 7,push:6 }}>
+            <a href="/" style={{ color: 'black', fontSize: '30px' }} >
+              <span className="title FS-16 ML-8"  onClick={() => console.info("shi") }>AlenZhang's Blog</span>
+            </a>
           </Col>
-          <Col xs={{ span: 8, push: 8 }} xl={{ span: 6, push: 10 }} >
+          <Col xs={{span: 23,push:1}} md={{span: 10, push:3}} xl={{ span: 5, push:6 }} >
             {menuList()}
           </Col>
         </Row>
