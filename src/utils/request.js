@@ -4,7 +4,7 @@ import queryString from 'query-string'
 import localStorage from 'localStorage'
 const dns = {
   API_ROOT: '',
-  API_ROOT_LOCAL: 'http://localhost:8094',
+  API_ROOT_LOCAL: 'http://server.dreamma.vip',
   REMOTE_HOSTS: ['http://server.dreamma.vip'],
 }
 

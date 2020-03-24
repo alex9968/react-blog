@@ -9,10 +9,11 @@ import { Col } from 'antd'
 
 import Nav from './components/Nav';
 import Foot from './components/Foot';
-import Home from './pages/home';
+import Home from './pages/article';
 import Chat from './pages/chat';
 import About from './pages/about';
 import Project from './pages/project';
+import Article from './pages/article';
 
 import 'antd/dist/antd.css';
 
@@ -32,6 +33,7 @@ ReactDOM.render(
               <Route path="/chat" component={Chat} />
               <Route path="/about" component={About} />
               <Route path="/project" component={Project} />
+              <Route path="article/:id" component={Article}/>
             </Switch>
           </Router>
         </Col>

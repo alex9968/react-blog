@@ -2,6 +2,9 @@ import React, { Component, useEffect, useState } from "react";
 import { Input, Button, Row, Col } from 'antd'
 import { useDispatch, useSelector  } from 'react-redux'
 import { viewMergeIn,viewSetIn   } from '../redux/modules/view'
+import request from '../utils/request'
+import ArticleCard from '../components/ArticleCard';
+import { articlesSet } from '../redux/modules/articles'
 
 const Project = () => {
   // const dispatch = useDispatch()
@@ -11,9 +14,19 @@ const Project = () => {
 
   //const [chatHistory, setChatHistory] = useState([]);
   //const [message, setMessage] = useState('');
-  useEffect(() =>{
+  const dispatch = useDispatch()
+  const articles = useSelector(state => state.articles)
 
-  })
+  const articlesIndex = async () => {
+    const res = await request.get('articles')
+    if (res.ok) {
+      dispatch(articlesSet(res.data))
+    }
+  }
+
+  useEffect(() => {
+    articlesIndex()
+  }, [articlesIndex])
 
   return (
     <div className="App">

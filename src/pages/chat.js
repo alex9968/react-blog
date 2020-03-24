@@ -1,7 +1,6 @@
 import React, { Component, useEffect, useState } from "react";
 import { connect, sendMsg } from "../http/websocket";
 import ChatHistory from '../components/ChatHistory';
-import ChatInput from '../components/ChatInput/ChatInput';
 import { Input, Button, Row, Col } from 'antd'
 import { useDispatch, useSelector  } from 'react-redux'
 import { viewMergeIn,viewSetIn   } from '../redux/modules/view'
