@@ -1,5 +1,5 @@
 import React, { Component, useEffect, useState } from "react";
-import { Input, Button, Row, Col } from 'antd'
+import { Input, message, Button, Row, Col } from 'antd'
 import { useDispatch, useSelector  } from 'react-redux'
 import { viewMergeIn,viewSetIn   } from '../redux/modules/view'
 import { articlesSet } from '../redux/modules/articles'
@@ -11,26 +11,27 @@ import { Skeleton  } from 'antd';
 
 
 const Home = () => {
-  // const dispatch = useDispatch()
-  // const view = useSelector(state => state.view)
-  // const message = view.get('message')
-  // console.log(message)
+  const dispatch = useDispatch()
+  const articles = useSelector(state => state.articles)
 
-  //const [chatHistory, setChatHistory] = useState([]);
   //const [message, setMessage] = useState('');
-  const articlesIndex = async() => {
+
+  const getArticles = async() => {
     const res = await request('get', 'articles')
-    console.log("res:.data", res.data)
-    console.log("res:", res)
+    if (!res.data){
+      dispatch(articlesSet(res.data))
+    } else{
+      //message.warn('数据请求错误！')
+    }
   }
 
   useEffect(() => {
-    articlesIndex()
-  }, [])
+    getArticles()
+  }, [getArticles])
 
   return (
     <div style={{ }}>
-        <Row style={{  }}>
+      <Row style={{  }}>
         Homomeshhhhhomeshhhhhomeshhhhhomeshhhhhomeshhhhhomeshhhhheshhhhhomeshhhhhh
       </Row>
     </div>
