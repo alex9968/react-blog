@@ -19,7 +19,7 @@ const Home = () => {
   //const [chatHistory, setChatHistory] = useState([]);
   //const [message, setMessage] = useState('');
   const articlesIndex = async() => {
-    const res = await request.get('articles')
+    const res = await request('get', 'articles')
     console.log("res:.data", res.data)
     console.log("res:", res)
   }
