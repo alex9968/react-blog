@@ -1,14 +1,40 @@
 import fetch from 'isomorphic-unfetch'
+import { message } from 'antd'
 import queryString from 'query-string'
+import localStorage from 'localStorage'
 const dns = {
   API_ROOT: 'http://localhost:8000',
+  API_ROOT_LOCAL: 'http://localhost:80',
+  REMOTE_HOSTS: ['http://server.dreamma.vip'],
 }
 
 const R = {
+  authorization: null,
+  authorizationKey: 'Token',
+
+  getAuthorization() {
+    R.authorization = localStorage.getItem(R.authorizationKey)
+    return R.authorization
+  },
+
+  setAuthorization(s) {
+    console.info(s)
+    R.authorization = s
+    localStorage.setItem(R.authorizationKey, s)
+    return s
+  },
+
+  removeAuthorization() {
+    localStorage.removeItem(R.authorizationKey)
+  },
+
   headers() {
     return {
+      //Authorization: R.getAuthorization(),
       Accept: 'application/json',
-      "Content-Type": 'application/x-www-form-urlencoded',
+      'Content-Type': 'application/json'
+      //'Accept-Encoding': 'gzip,deflate',
+      //'Access-Control-Allow-Origin': '*',
     }
   },
 
@@ -26,7 +52,28 @@ const R = {
     return Promise.reject(new Error(`ok: ${ok}, status: ${status}`))
   },
 
+  getApiRoot() {
+    if (localStorage.getItem('resolveByLocal') === 'true') {
+      return R.setApiRoot(dns.API_ROOT_LOCAL)
+    }//localhost 不需要ping
+    return Promise.race(dns.REMOTE_HOSTS.map(R.testApiRoot))
+      .then(R.setApiRoot)
+      .catch(error => {
+        const msg = `Failed to ping any remote: ${error}`
+        message.error(msg)
+        return Promise.reject(new Error(msg))
+      })
+  },
+
+  async setApiRoot(newApiRoot) {
+    dns.API_ROOT = newApiRoot
+    localStorage.setItem('API_ROOT', newApiRoot)
+    return newApiRoot
+  },
+
+
   delete(path, data) {
+    R.getAuthorization()
     return fetch(`${dns.API_ROOT}/${path}`, {
       method: 'DELETE',
       body: JSON.stringify(R.body(data)),
@@ -43,6 +90,29 @@ const R = {
     }
   },
 
+  async parseResponse(res) {
+    const authorization = res.headers.get('Authorization')
+    //去除response header 里面的token,只有第一次sign_in 里面才有
+    console.info('parseResponse:', authorization )
+    if (authorization) {
+      console.info(authorization)
+      R.setAuthorization(authorization)
+    }
+    console.info('Confirm parseResponse:', R.getAuthorization())
+    //res.headers.forEach((v,k)=>console.log(k,v))
+    //localStorage.setItem(R.authorizationKey, authorization)
+
+    console.info(res)
+    let json = res.json();
+    if (res.status >= 400) {
+      json.status = res.status
+    }
+    if (res.status === 401) {
+      R.setAuthorization('401')
+    }
+    return json
+  },
+
   async get(path, data = {}, root = null) {
     //R.getAuthorization()
     const params = R.body(data)
@@ -53,8 +123,10 @@ const R = {
       //mode: 'no-cors',
       headers: R.headers()
     })
-    const json = await res.json()
-    return json
+    // const authorization = res.headers.get('Authorization')
+    // console.info(authorization )
+    const content = await R.parseResponse(res)
+    return content
   },
 
   async patch(path, data) {

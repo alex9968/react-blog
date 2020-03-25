@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Row, List, Card } from 'antd'
 import { BrowserRouter as Router,Route} from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import fetch from 'isomorphic-unfetch'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { articlesSet } from '../redux/modules/articles'
@@ -14,18 +15,16 @@ const Article = () =>{
   const [loading, setLoading] = useState(true)
   const dispatch = useDispatch()
   const articles = useSelector(state => state.articles)
+  const [pp, setPp] =  useState('')
 
-  const articlesIndex = async () => {
+  const articlesIndex = async() => {
     const res = await request.get('articles')
-    if (res.ok) {
-      dispatch(articlesSet(res.data))
-      setLoading(false)
-    }
+    console.log("res:", res.data)
   }
 
   useEffect(() => {
     articlesIndex()
-  }, [articlesIndex])
+  }, [])
 
   const articleList = articles
     .map(user => user.set('key', user.get('id')))
@@ -37,7 +36,7 @@ const Article = () =>{
 
   return(
     <div style={{background: '#ECECEC'}}>
-      
+
       { loading ? (<Row style={{ padding: '5% 8% 0 12%' }}><Skeleton  avatar active paragraph={{ rows: 6}} /></Row>) : (
         <div style={{ textAlign: 'left', margin: '5% 0%' }}>
           {articleList.map(
@@ -45,6 +44,7 @@ const Article = () =>{
           )}
         </div>
       )}
+      <div>{pp}</div>
 
       <style global jsx>
         {`
@@ -52,7 +52,7 @@ const Article = () =>{
         }
 
         @media screen and (max-width: 400px) {
-  
+
         }
          .card-row{
             font-size: 60px;

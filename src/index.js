@@ -9,8 +9,8 @@ import { Col } from 'antd'
 
 import Nav from './components/Nav';
 import Foot from './components/Foot';
-import Home from './pages/article';
-import Chat from './pages/chat';
+import Home from './pages/home';
+import Chat from './pages/home';
 import About from './pages/about';
 import Project from './pages/project';
 import Article from './pages/article';

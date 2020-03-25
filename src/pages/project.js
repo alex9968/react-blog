@@ -17,11 +17,11 @@ const Project = () => {
   const dispatch = useDispatch()
   const articles = useSelector(state => state.articles)
 
-  const articlesIndex = async () => {
-    const res = await request.get('articles')
-    if (res.ok) {
-      dispatch(articlesSet(res.data))
-    }
+  const articlesIndex =  () => {
+    const res =  request.get('articles')
+    // if (res.ok) {
+    //   dispatch(articlesSet(res.data))
+    // }
   }
 
   useEffect(() => {
