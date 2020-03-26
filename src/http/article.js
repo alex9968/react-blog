@@ -4,19 +4,30 @@ import I from 'immutable'
 import { articlesSet ,articlesSetIn } from '../redux/modules/articles'
 
 
-export const getArticles = () => D =>
-  request
-    .get('articles')
-    .then(body => {
-      const { data, ok } = body
-      console.info(body)
-      if (ok) {
-        D(articlesSet(I.fromJS(_.keyBy(data || [], 'id'))))
-        //articles.map(v => v.set('key', v.get('id')))
-      }
-      return ok
-    })
-    .catch(e => console.info(e))
+// export const getArticles = () => D =>
+//   request
+//     .get('articles')
+//     .then(body => {
+//       const { data, ok } = body
+//       console.info(body)
+//       if (ok) {
+//         D(articlesSet(I.fromJS(_.keyBy(data || [], 'id'))))
+//         //articles.map(v => v.set('key', v.get('id')))
+//       }
+//       return ok
+//     })
+//     .catch(e => console.info(e))
+
+export const getArticles = async () => D =>{
+  let res = await request('get', 'articles')
+  if (!res.data){
+    dispatch(articlesSet(res.data))
+  } else{
+    //message.warn('数据请求错误！')
+  }
+}
+ 
+
 
 export const createArticle = (title, content, img) => D =>
   request

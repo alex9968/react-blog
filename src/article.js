@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Row, List, Card } from 'antd'
-import { BrowserRouter as Router,Route} from 'react-router-dom';
-import { Link } from 'react-router-dom';
-import fetch from 'isomorphic-unfetch'
-
+import Link from 'next/link'
 import { useDispatch, useSelector } from 'react-redux'
 import { articlesSet } from '../redux/modules/articles'
 import { getDay } from '../utils/time'
@@ -11,20 +8,22 @@ import request from '../utils/request'
 import ArticleCard from '../components/ArticleCard';
 import { Skeleton  } from 'antd';
 
-const Article = ({id}) =>{
+const Article = () =>{
   const [loading, setLoading] = useState(true)
   const dispatch = useDispatch()
   const articles = useSelector(state => state.articles)
-  const [pp, setPp] =  useState('')
 
-  const articlesIndex = async() => {
-    const res = await request('get', `articles/${id}`)
-    console.log("res:", res.data)
+  const articlesIndex = async () => {
+    const res = await request.get('articles')
+    if (res.ok) {
+      dispatch(articlesSet(res.data))
+      setLoading(false)
+    }
   }
 
   useEffect(() => {
     articlesIndex()
-  }, [articlesIndex])
+  }, [])
 
   const articleList = articles
     .map(user => user.set('key', user.get('id')))
@@ -36,7 +35,10 @@ const Article = ({id}) =>{
 
   return(
     <div style={{background: '#ECECEC'}}>
-
+      <Row className='bg' style={{ color: '#fff', textAlign: 'center' }}>
+        <h1>活动发布</h1>
+        <p>记录美好瞬间</p>
+      </Row>
       { loading ? (<Row style={{ padding: '5% 8% 0 12%' }}><Skeleton  avatar active paragraph={{ rows: 6}} /></Row>) : (
         <div style={{ textAlign: 'left', margin: '5% 0%' }}>
           {articleList.map(
@@ -44,15 +46,45 @@ const Article = ({id}) =>{
           )}
         </div>
       )}
-      <div>{pp}</div>
 
       <style global jsx>
         {`
         @media screen and (max-width: 2000px) {
+         .bg{
+            background-attachment: fixed;
+            background-image: url('http://www.ypaphoto.com/images/banner-join.jpg');
+            width: 100%;
+            height: 60vh;
+            text-align:'center';
+          }
+          .bg h1{
+            color: #ffffff;
+            font-size: 100px;
+            padding-top: 18vh;
+          }
+          .bg p{
+            font-size: 50px;
+            letter-spacing:10;
+          }
         }
 
         @media screen and (max-width: 400px) {
-
+         .bg{
+            background-attachment: fixed;
+            background-image: url('http://www.ypaphoto.com/images/banner-join.jpg');
+            width: 100%;
+            height: 25vh;
+            text-align:'center';
+          }
+          .bg h1{
+            font-size: 30px;
+            padding-top: 8vh;
+          }
+          .bg p{
+            font-size: 20px;
+            letter-spacing:5;
+          }
+  
         }
          .card-row{
             font-size: 60px;
