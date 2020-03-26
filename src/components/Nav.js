@@ -30,7 +30,7 @@ const Nav = () => {
           </Col>
         </Row>
       </nav>
-      <style jsx={true}>
+      <style jsx>
         {`
           .title:hover{
             color: grey;

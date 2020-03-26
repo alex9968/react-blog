@@ -1,32 +1,43 @@
-import React,{ useContext } from 'react'
-import { Col, Row, Card } from 'antd'
-import { BrowserRouter as Router, Link} from 'react-router-dom';
+import React from 'react'
+import { Col, Row } from 'antd'
+import { Link} from 'react-router-dom';
 import { getDay } from '../utils/time'
+import Tag from './Tag'
 
 const ArticleCard =({data}) => {
   const {id, text, title,created_at} = data;
-  let img="shi"
   return (
-    <Row>
-      <Col xs={24} md={{ span: 20, push: 2  }} xl={{ span: 12, push: 6 }}>
-          <Link to={{ pathname: `/article/${id}` , query : {   } }}>
-            <Row style={{ margin: '10px', borderTop: 'solid 2px lightgrey' }}>
-              <Col span={8}>
-                <img  style={{ objectFit:'cover', margin: '20px 0px' }} height='100px' width='400px' alt="example" src={img} />
-              </Col>
-              <Col  span={12} push={4} style={{ margin: '20px 0 0 0' }}>
-                <Row><h2 className="info">{title}</h2></Row>
-                <Row><h2 className="info">{text}</h2></Row>
-                <Row><span>{getDay(created_at)}</span></Row>
-              </Col>
-            </Row>
-          </Link>
-      </Col>
-      <style jsx>
-        {`
+    <div className="main">
+      <Link to={{ pathname: `/article/${id}` , query : {   } }}>
+        <Row><h2 className="font">{title}</h2></Row>
+        <Row>
+          <Col span={4}>
+            <span style={{ color: 'grey' }}>{getDay(created_at)}</span>
+          </Col>
+          <Col span={20}><Tag tag="Golang"/></Col>
+        </Row>
+        <Row style={{ marginTop: '10px' }}><p className="info">{text}</p></Row>
+        <style jsx>
+          {`
+        .main {
+          border-bottom: 1px solid lightgrey;
+          background-color: #fff;
+          padding: 20px;
+          margin: 1px 0px;
+        }
+        .font{
+          font-family: "Iowan Old Style", "Ovo", "Hoefler Text", Georgia, "Times New Roman", "TIBch", "Source Han Sans", "PingFangSC-Regular", "Hiragino Sans GB", "STHeiti", "Microsoft Yahei", "Droid Sans Fallback", "WenQuanYi Micro Hei", sans-serif;
+          font-size: 22px;
+
+        }
+        .main:hover{
+          border-bottom: 2px solid transparent;
+          border-top: 2px solid transparent;
+          box-shadow: 0 3px 15px rgba(0,0,0,.2)
+
+        }
         @media screen and (max-width: 2000px) {
           .info{
-            font-size: 18px;
           }
         }
 
@@ -36,11 +47,10 @@ const ArticleCard =({data}) => {
           }
         }
         `}
-      </style>
-    </Row>
+        </style>
+      </Link>
+    </div>
   )
 }
 export default ArticleCard
-
-
 
