@@ -40,7 +40,7 @@ const Article = () =>{
       { loading ? (<Row style={{ padding: '5% 8% 0 12%' }}><Skeleton  avatar active paragraph={{ rows: 6}} /></Row>) : (
         <div style={{ textAlign: 'left', margin: '5% 0%' }}>
           {articleList.map(
-            v => <ArticleCard key={v.id}  date={v} />
+            v => <ArticleCard key={v.id}  data={v} />
           )}
         </div>
       )}

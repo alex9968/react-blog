@@ -19,6 +19,7 @@ const HttpState = {
 const initialState = I.fromJS({
   message: '',
   chatHistory: {},
+  articleDetails: {},
   signupDialogOpen: false,
   loader: {
     show: false,
@@ -93,55 +94,6 @@ export const addRequestingIds = (table, value) => ({
   table,
   value
 })
-export const delRequestingIds = (table, value) => ({
-  type: DEL_REQUESTING_IDS,
-  table,
-  value
-})
-
-export const setSearchText = (table, searchText) => (D, S) => {
-  D(viewSet(S().view.setIn(['tables', table, 'searchText'], searchText)))
-}
-
-export const setAllChecked = tableName => (D, S) => {
-  const state = S()
-  D(
-    viewSet(
-      state.view.updateIn(['tables', tableName], table => {
-        const allChecked = !table.get('allChecked')
-        return table.set('allChecked', allChecked).set('checked', allChecked ? state[tableName].map(item => item.get('id')).toSet() : Set())
-      })
-    )
-  )
-}
-
-export const setFilterOfTable = (table, path = ['tables', table, 'filter']) => newFilter => (D, S) => {
-  const oldFilter = S().view.getIn(path)
-  const filterString = _.isFunction(newFilter) ? newFilter.toString() : ''
-  const oldFilterString = _.isFunction(oldFilter) ? oldFilter.toString() : ''
-  D(viewSetIn(path, oldFilterString === filterString ? () => true : newFilter))
-}
-
-export const selectPaymentGood = good => D => {
-  D(viewSetIn(['payment', 'goodId'], good.get('id')))
-}
-
-export const unionPendingSsconfigs = ssconfigs => (D, S) => {
-  const ssconfigIds = ssconfigs.map(s => `${s.get('id')}:${s.get('server_port')}`)
-  const ssconfigIdsSet = S()
-    .view.get('pendingSsconfigs')
-    .union(ssconfigIds)
-  D(viewSetIn(['pendingSsconfigs'], ssconfigIdsSet))
-}
-
-export const subtractPendingSsconfigs = ssconfigs => (D, S) => {
-  const ssconfigIds = ssconfigs.map(s => `${s.id}:${s.port}`)
-  const ssconfigIdsSet = S()
-    .view.get('pendingSsconfigs')
-    .subtract(ssconfigIds)
-  D(viewSetIn(['pendingSsconfigs'], ssconfigIdsSet))
-}
-
 export const setLoggedIn = result => D => D(viewSetIn(['loginState', 'result'], result))
 
 export const getLoginState = view => {

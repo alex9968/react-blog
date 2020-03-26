@@ -1,52 +1,32 @@
 import React, { useState, useEffect } from 'react'
-import { Row, List, Card } from 'antd'
-import { BrowserRouter as Router,Route} from 'react-router-dom';
-import { Link } from 'react-router-dom';
-import fetch from 'isomorphic-unfetch'
-
 import { useDispatch, useSelector } from 'react-redux'
-import { articlesSet } from '../redux/modules/articles'
-import { getDay } from '../utils/time'
+import { viewSetIn } from '../redux/modules/view'
 import request from '../utils/request'
-import ArticleCard from '../components/ArticleCard';
-import { Skeleton  } from 'antd';
 
-const Article = ({id}) =>{
-  const [loading, setLoading] = useState(true)
+const Article = (props) =>{
   const dispatch = useDispatch()
-  const articles = useSelector(state => state.articles)
-  const [pp, setPp] =  useState('')
+  const article = useSelector(state => state.view).get('articleDetails').toJS()
+  const { id } = props.match.params;
+  console.info(article)
+  const {title, text } = article;
 
-  const articlesIndex = async() => {
-    const res = await request('get', `articles/${id}`)
-    console.log("res:", res.data)
-  }
+  useEffect( () => {
+    request.get(`articles/${id}`)
+      .then(body => {
+        const { data, ok } = body
+        console.info(body)
+        if (ok) {
+          dispatch(viewSetIn(['articleDetails'], data))
+        }
+      })
+  }, [dispatch, id])
 
-  useEffect(() => {
-    articlesIndex()
-  }, [articlesIndex])
-
-  const articleList = articles
-    .map(user => user.set('key', user.get('id')))
-    .toList()
-    .toJS()
-    .sort((a, b) => (a.created_at > b.created_at ? -1 : 1))
-
-  console.info(articleList)
 
   return(
     <div style={{background: '#ECECEC'}}>
-
-      { loading ? (<Row style={{ padding: '5% 8% 0 12%' }}><Skeleton  avatar active paragraph={{ rows: 6}} /></Row>) : (
-        <div style={{ textAlign: 'left', margin: '5% 0%' }}>
-          {articleList.map(
-            v => <ArticleCard key={v.id} id={v.id} img={v.img} title={v.title} content={v.content} date={getDay(v.created_at)} />
-          )}
-        </div>
-      )}
-      <div>{pp}</div>
-
-      <style global jsx>
+      <div>{title}</div>
+      <div>{text}</div>
+      <style jsx>
         {`
         @media screen and (max-width: 2000px) {
         }

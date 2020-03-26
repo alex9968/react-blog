@@ -1,25 +1,46 @@
 import React from 'react'
 import { Row, Col, Menu, Dropdown } from 'antd'
-//import { Link,  BrowserRouter as Router,Route} from 'react-router-dom';
+import {  BrowserRouter as Router, Link } from 'react-router-dom';
 
 const Nav = () => {
   const defaultMenus = [
-    { href: '/index', label: 'HOME' },
+    { href: '/', label: 'HOME' },
     { href: '/project', label: 'PROJECTS' },
     { href: '/chat', label: 'CHAT-ROOM' },
     { href: '/about', label:'ABOUT'}
   ]
 
-  const menuList = () => {
-    return (
-      <ul className="nav navbar-nav">
-          {defaultMenus.map(({ href, label }) => (
-            <li className="mega-menu" key={href}>
-                <a href={href}  className="underline">{label}</a>
-            </li>
-          ))}
-          <style jsx>
-            {`
+  return (
+    <div>
+      <nav >
+        <Row type="flex" justfiy="center" style={{ lineHeight: '8vh', backgroundColor: '#fff' }}>
+          <Col xs={{span: 16,push:4}} md={{ span:10, push:3 }}  xl={{ span: 7,push:6 }}>
+            <Link to="/" style={{ color: 'black', fontSize: '30px' }} >
+              <span className="title FS-16 ML-8"  onClick={() => console.info("shi") }>AlenZhang's Blog</span>
+            </Link>
+          </Col>
+          <Col xs={{span: 23,push:1}} md={{span: 10, push:3}} xl={{ span: 5, push:6 }} >
+            <ul className="nav navbar-nav">
+              {defaultMenus.map(({ href, label }) => (
+                <li className="mega-menu" key={href}>
+                  <Link to={href}  className="underline">{label}</Link>
+                </li>
+              ))}
+            </ul>
+          </Col>
+        </Row>
+      </nav>
+      <style jsx={true}>
+        {`
+          .title:hover{
+            color: grey;
+          }
+          .title{
+            text-decoration: none;
+            cursor:pointer;
+            font-family: "Avenir Next","Avenir","Helvetica Neue",sans-serif;
+          }
+
           .navbar-nav > li {
             float: left;
           }
@@ -77,36 +98,7 @@ const Nav = () => {
             transform: scale(1);
             transform-origin: left;
           }
-        `}
-          </style>
-      </ul>
-    )
-  }
 
-  return (
-    <div>
-      <nav >
-        <Row type="flex" justfiy="center" style={{ lineHeight: '8vh', backgroundColor: '#fff' }}>
-          <Col xs={{span: 16,push:4}} md={{ span:10, push:3 }}  xl={{ span: 7,push:6 }}>
-            <a href="/" style={{ color: 'black', fontSize: '30px' }} >
-              <span className="title FS-16 ML-8"  onClick={() => console.info("shi") }>AlenZhang's Blog</span>
-            </a>
-          </Col>
-          <Col xs={{span: 23,push:1}} md={{span: 10, push:3}} xl={{ span: 5, push:6 }} >
-            {menuList()}
-          </Col>
-        </Row>
-      </nav>
-      <style jsx>
-        {`
-          .title:hover{
-            color: grey;
-          }
-          .title{
-            text-decoration: none;
-            cursor:pointer;
-            font-family: "Avenir Next","Avenir","Helvetica Neue",sans-serif;
-          }
           `}
       </style>
     </div>

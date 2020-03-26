@@ -20,27 +20,27 @@ import 'antd/dist/antd.css';
 const store = createStore(window.INITIAL_STATE, createHashHistory())
 window.STORE = store
 
+//<Redirect path="/" exact={true} to="/index" />
 ReactDOM.render(
   <div>
     <ReduxProvider store={store}>
-      <Nav />
-      <div style={{ minHeight: '83vh' }}>
-        <Col xs={{span: 22,push:1}} md={{span: 20, push:2}} xl={{ span: 12, push:6 }} style={{ border:'1px solid red' }} >
-          <Router>
+      <Router>
+        <Nav />
+        <div style={{ minHeight: '83vh' }}>
+          <Col xs={{span: 22,push:1}} md={{span: 20, push:2}} xl={{ span: 12, push:6 }} style={{ border:'1px solid red' }} >
             <Switch>
-              <Redirect path="/" exact={true} to="/index" />
-              <Route path="/index" component={Home} exact/>
-              <Route path="/chat" component={Chat} />
+              <Route path="/" component={Home} exact />
+              <Route path="/chat" ><Chat /></Route>
               <Route path="/about" component={About} />
               <Route path="/project" component={Project} />
-              <Route path="article/:id" component={Article}/>
+              <Route path="/article/:id" component={Article}/>
             </Switch>
-          </Router>
-        </Col>
-      </div>
-      <Foot />
-      </ReduxProvider>
-    </div>,
+          </Col>
+        </div>
+        <Foot />
+      </Router>
+    </ReduxProvider>
+  </div>,
   document.getElementById('root')
 );
 
