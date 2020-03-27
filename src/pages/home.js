@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { articlesSet } from '../redux/modules/articles'
 import request from '../utils/request'
 import ArticleCard from '../components/ArticleCard';
-import { Row, Skeleton  } from 'antd'
+import { Row, Skeleton, Pagination } from 'antd'
 // import I from 'immutable'
 // import _ from 'lodash'
 
@@ -12,6 +12,12 @@ const Article = () =>{
   const [loading, setLoading] = useState(true)
   const dispatch = useDispatch()
   const articles = useSelector(state => state.articles)
+  const total = articles.count()
+  const [currentPage, setCurrentPage] = useState(1)
+
+  console.info(total)
+  console.info(articles.count())
+  
 
   useEffect( () => {
     request.get('articles')
@@ -45,7 +51,11 @@ const Article = () =>{
         </div>
       )}
 
+      <div style={{ texAlign:'center', backgourndColor:'#fff' }}>
       
+        <Pagination defaultCurrent={1} current={currentPage} pageSize={4} total={total}  />
+      </div>
+
 
       <style global jsx>
         {`

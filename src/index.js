@@ -10,10 +10,11 @@ import { Col, Row } from 'antd'
 import Nav from './components/Nav';
 import Foot from './components/Foot';
 import Home from './pages/home';
-import Chat from './pages/test';
+import Chat from './pages/home';
 import About from './pages/about';
 import Project from './pages/project';
-import Article from './pages/article';
+import Article from './pages/article3';
+import Publish from './pages/publish';
 
 import 'antd/dist/antd.css';
 
@@ -33,6 +34,7 @@ ReactDOM.render(
               <Route path="/chat" component={Chat} />
               <Route path="/about" component={About} />
               <Route path="/project" component={Project} />
+              <Route path="/publish" component={Publish} />
               <Route path="/article/:id" component={Article}/>
             </Switch>
           </Col>

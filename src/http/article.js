@@ -18,20 +18,9 @@ import { articlesSet ,articlesSetIn } from '../redux/modules/articles'
 //     })
 //     .catch(e => console.info(e))
 
-export const getArticles = async () => D =>{
-  let res = await request('get', 'articles')
-  if (!res.data){
-    dispatch(articlesSet(res.data))
-  } else{
-    //message.warn('数据请求错误！')
-  }
-}
- 
-
-
-export const createArticle = (title, content, img) => D =>
+export const createArticle = (title, text) => D =>
   request
-    .post('articles', { title, content, img })
+    .post('articles', { title, text})
     .then(body => {
       const { ok } = body
       if(ok) {

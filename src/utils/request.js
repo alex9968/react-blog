@@ -7,7 +7,7 @@ const R = {
     return {
       //Authorization: R.getAuthorization(),
       Accept: 'application/json',
-      "Content-Type": 'application/x-www-form-urlencoded'
+      "Content-Type": 'application/json'
     }
   },
 
@@ -50,8 +50,11 @@ const R = {
     return json
   },
 
-  async post(path, data) {
-    const res = await fetch(`${dns.API_ROOT}/${path}`, {
+  async post(path, data= {}) {
+    const params = R.body(data)
+    const query = queryString.stringify(params)
+    console.info(`${dns.API_ROOT}/${path}?${query}`)
+    const res = await fetch(`${dns.API_ROOT}/${path}?${query}`, {
       method: 'POST',
       headers: R.headers(),
       body: JSON.stringify(R.body(data))
