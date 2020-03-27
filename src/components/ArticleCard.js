@@ -22,7 +22,7 @@ const ArticleCard =({data}) => {
         .main {
           border-bottom: 1px solid lightgrey;
           background-color: #fff;
-          padding: 20px;
+          padding: 20px 20px;
           margin: 1px 0px;
         }
         .font{

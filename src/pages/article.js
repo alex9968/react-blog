@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { viewSetIn } from '../redux/modules/view'
 import request from '../utils/request'
+import ReactMarkdown  from 'react-markdown'
+const text2 = '../../public/md/join.md'
 
 const Article = (props) =>{
   const dispatch = useDispatch()
@@ -25,7 +27,8 @@ const Article = (props) =>{
   return(
     <div style={{background: '#ECECEC'}}>
       <div>{title}</div>
-      <div>{text}</div>
+      <ReactMarkdown source={text} />
+      <ReactMarkdown source={text2} />
       <style jsx>
         {`
         @media screen and (max-width: 2000px) {

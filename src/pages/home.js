@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import I from 'immutable'
-import _ from 'lodash'
-import { Row, List, Card } from 'antd'
 import { useDispatch, useSelector } from 'react-redux'
 import { articlesSet } from '../redux/modules/articles'
 import request from '../utils/request'
 import ArticleCard from '../components/ArticleCard';
-import { Skeleton  } from 'antd';
+import { Row, Skeleton  } from 'antd'
+// import I from 'immutable'
+// import _ from 'lodash'
+
 
 const Article = () =>{
   const [loading, setLoading] = useState(true)
@@ -37,13 +37,15 @@ const Article = () =>{
 
   return(
     <div style={{background: '#ECECEC'}}>
-      { loading ? (<Row style={{ padding: '5% 8% 0 12%' }}><Skeleton  avatar active paragraph={{ rows: 6}} /></Row>) : (
-        <div style={{ textAlign: 'left', margin: '5% 0%' }}>
+      { loading ? (<Row style={{ padding: '0% 8% 0 12%' }}><Skeleton  avatar active paragraph={{ rows: 6}} /></Row>) : (
+        <div style={{ textAlign: 'left'}}>
           {articleList.map(
             v => <ArticleCard key={v.id}  data={v} />
           )}
         </div>
       )}
+
+      
 
       <style global jsx>
         {`
