@@ -20,6 +20,7 @@ const initialState = I.fromJS({
   message: '',
   chatHistory: {},
   articleDetails: {},
+  articlesFindByTag: {},
   signupDialogOpen: false,
   loader: {
     show: false,

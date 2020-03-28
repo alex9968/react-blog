@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { articlesSet, articlesMerge } from '../redux/modules/articles'
 import request from '../utils/request'
 import ArticleCard from '../components/ArticleCard';
-import { Row, Skeleton} from 'antd'
+import { Row, message, Skeleton} from 'antd'
 import {  DoubleRightOutlined } from '@ant-design/icons'
 
 // import I from 'immutable'
@@ -35,6 +35,9 @@ const Article = () =>{
       .then(body => {
         const { data, ok } = body
         console.info(body)
+        if(data.length === 0) {
+          message.warn("没有更多了！")
+        }
         if (ok) {
           //dispatch(articlesSet(I.fromJS(_.keyBy(data || [], 'id'))))
           dispatch(articlesMerge(data))

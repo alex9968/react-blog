@@ -6,20 +6,19 @@ import { Switch, Redirect } from 'react-router-dom';
 import { createHashHistory  } from 'history'
 import createStore from './redux/createStore'
 
-import { Layout, Layout2 }  from './components/Layout';
+import { Layout }  from './components/Layout';
 import Nav from './components/Nav';
 import Foot from './components/Foot';
 import Home from './pages/home';
 import Chat from './pages/chat';
 import About from './pages/about';
+import Sort from './pages/sort';
 import Project from './pages/project';
-import Article from './pages/article3';
+import Article from './pages/article';
 import Publish from './pages/publish';
 import 'antd/dist/antd.css';
 const store = createStore(window.INITIAL_STATE, createHashHistory())
 window.STORE = store
-
-
 
 //<Redirect path="/" exact={true} to="/index" />
 ReactDOM.render(
@@ -27,14 +26,17 @@ ReactDOM.render(
     <ReduxProvider store={store}>
       <Router>
         <Nav />
+        <Layout>
         <Switch>
-          <Route path="/" exact><Layout><Home/></Layout></Route>
-          <Route path="/about"><Layout><About/></Layout></Route>
-          <Route path="/project"><Layout><Project/></Layout></Route>
-          <Route path="/article/:id"><Layout><Article/></Layout></Route>
-          <Route path="/publish"><Layout2><Publish/></Layout2></Route>
-          <Route path="/chat"><Layout2><Chat/></Layout2></Route>
+          <Route path="/" exact component={Home} />
+          <Route path="/about" component={About} />
+          <Route path="/sort/:tag" component={Sort} />
+          <Route path="/project" component={Project} />
+          <Route path="/article/:id" component={Article} />
+          <Route path="/publish" component={Publish} />
+          <Route path="/chat" component={Chat} />
         </Switch>
+        </Layout>
         <Foot />
       </Router>
     </ReduxProvider>

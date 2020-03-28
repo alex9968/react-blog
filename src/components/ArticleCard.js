@@ -5,7 +5,7 @@ import { getDay } from '../utils/time'
 import Tag from './Tag'
 
 const ArticleCard =({data}) => {
-  const {id, text, title,created_at} = data;
+  const {id, text, title,created_at, tags} = data;
   return (
     <div className="main">
       <Link to={{ pathname: `/article/${id}` , query : {   } }}>
@@ -14,7 +14,9 @@ const ArticleCard =({data}) => {
           <Col span={4}>
             <span style={{ color: 'grey' }}>{getDay(created_at)}</span>
           </Col>
-          <Col span={20}><Tag tag="Golang"/></Col>
+          <Col span={20}>
+            {tags.split(",").map( v => <Tag key={v} data={v} /> )}
+          </Col>
         </Row>
         <Row style={{ marginTop: '10px' }}><p className="info">{text}</p></Row>
         <style jsx>

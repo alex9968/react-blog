@@ -14,24 +14,11 @@ const Project = () => {
 
   //const [chatHistory, setChatHistory] = useState([]);
   //const [message, setMessage] = useState('');
-  const dispatch = useDispatch()
-  const articles = useSelector(state => state.articles)
-
-  const articlesIndex =  () => {
-    const res =  request.get('articles')
-    // if (res.ok) {
-    //   dispatch(articlesSet(res.data))
-    // }
-  }
-
-  useEffect(() => {
-    articlesIndex()
-  }, [articlesIndex])
 
   return (
     <div className="App">
       <Row style={{  }}>
-        Home
+        Projects
       </Row>
     </div>
   );
