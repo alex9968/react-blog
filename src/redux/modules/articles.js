@@ -14,7 +14,7 @@ export default immutableHandler((articles = Map({}), action) => {
     case ARTICLE_SET:
       return articles.set(id, value)
     case ARTICLES_MERGE:
-      return articles.mergeDeep(value)
+      return articles.concat(value)
     case ARTICLES_SET_IN:
       return articles.setIn(path, value)
     default:

@@ -1,26 +1,23 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { articlesSet } from '../redux/modules/articles'
+import { articlesSet, articlesMerge } from '../redux/modules/articles'
 import request from '../utils/request'
 import ArticleCard from '../components/ArticleCard';
-import { Row, Skeleton, Pagination } from 'antd'
+import { Row, Skeleton} from 'antd'
+import {  DoubleRightOutlined } from '@ant-design/icons'
+
 // import I from 'immutable'
 // import _ from 'lodash'
 
 
 const Article = () =>{
   const [loading, setLoading] = useState(true)
+  const [page, setPage] = useState(1)
   const dispatch = useDispatch()
   const articles = useSelector(state => state.articles)
-  const total = articles.count()
-  const [currentPage, setCurrentPage] = useState(1)
-
-  console.info(total)
-  console.info(articles.count())
-  
 
   useEffect( () => {
-    request.get('articles')
+    request.get('articles/1')
       .then(body => {
         const { data, ok } = body
         console.info(body)
@@ -32,6 +29,21 @@ const Article = () =>{
       })
   }, [dispatch])
 
+  const getMore = () =>{
+    console.info('nextPage:', page)
+    request.get(`articles/${page + 1}`)
+      .then(body => {
+        const { data, ok } = body
+        console.info(body)
+        if (ok) {
+          //dispatch(articlesSet(I.fromJS(_.keyBy(data || [], 'id'))))
+          dispatch(articlesMerge(data))
+          setLoading(false)
+        }
+      })
+    setPage(page + 1)
+  }
+
   const articleList = articles
     //.map(user => user.set('key', user.get('id')))
     .toList()
@@ -39,7 +51,6 @@ const Article = () =>{
     .sort((a, b) => (a.created_at > b.created_at ? -1 : 1))
 
   console.info(articleList )
-
 
   return(
     <div style={{background: '#ECECEC'}}>
@@ -51,9 +62,8 @@ const Article = () =>{
         </div>
       )}
 
-      <div style={{ texAlign:'center', backgourndColor:'#fff' }}>
-      
-        <Pagination defaultCurrent={1} current={currentPage} pageSize={4} total={total}  />
+      <div style={{ textAlign:'center', margin: '10px auto' }}  onClick={getMore} >
+        <DoubleRightOutlined style={{ fontSize: '40px', color:'#fff'}} rotate={90}/>
       </div>
 
 
