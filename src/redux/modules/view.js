@@ -10,35 +10,12 @@ export const VIEW_TOGGLE_IN = 'VIEW_TOGGLE_IN'
 export const ADD_REQUESTING_IDS = 'ADD_REQUESTING_IDS'
 export const DEL_REQUESTING_IDS = 'DEL_REQUESTING_IDS'
 
-const HttpState = {
-  UNKNOWN: 'UNKNOWN',
-  REQUESTING: 'REQUESTING',
-  REQUESTED: 'REQUESTED'
-}
 
 const initialState = I.fromJS({
-  message: '',
   chatHistory: {},
   articleDetails: {},
   articlesFindByTag: {},
-  signupDialogOpen: false,
-  loader: {
-    show: false,
-    text: null
-  },
   self: {},
-  loginState: {
-    state: HttpState.UNKNOWN,
-    result: {} // 'ok, 'user_type'
-  },
-  login: {
-    emailOrMobileOrUsername: 'test@test.com',
-    password: '123aaa',
-    code: '',
-    mobile: '',
-    mobileCountryCode: '+86',
-    method: 'password'
-  },
   apiRoot: request.API_ROOT
 })
 export default function(aView = initialState, action) {
@@ -84,17 +61,7 @@ export const viewDeleteIn = (path, value) => ({ type: VIEW_DELETE_IN, path, valu
 
 
 export const viewToggleIn = path => ({ type: VIEW_TOGGLE_IN, path })
-export const setFetching = (table, fetching) => ({
-  type: VIEW_SET_IN,
-  path: ['tables', table, 'fetching'],
-  value: fetching
-})
-export const getFetching = table => (D, S) => S().view.getIn(['tables', table, 'fetching'])
-export const addRequestingIds = (table, value) => ({
-  type: ADD_REQUESTING_IDS,
-  table,
-  value
-})
+
 export const setLoggedIn = result => D => D(viewSetIn(['loginState', 'result'], result))
 
 export const getLoginState = view => {

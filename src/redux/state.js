@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux'
 import reduceReducers from './reduceReducers'
 import articles from './modules/articles'
+import chat from './modules/chat'
 import settings from './modules/settings'
 import view from './modules/view'
 
@@ -21,6 +22,7 @@ export default asyncReducers =>
   reduceReducers(
     combineReducers({
       articles,
+      chat,
       settings,
       view,
       ...asyncReducers
