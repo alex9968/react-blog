@@ -8,7 +8,7 @@ const ChatUsers = () => {
   const count = users.length
 
   return (
-    <div style={{  }}>
+    <div style={{}}>
       <div style={{ textAlign: 'center', margin: '5px', fontSize: '15px' }}>当前在线({count})</div>
       {users.map(v => (
         <div className="user">
@@ -17,7 +17,7 @@ const ChatUsers = () => {
               <Avatar size="large" src={v.avatar} />
             </Col>
             <Col span={12} push={2}>
-              <div style={{ padding: '10px' }}>{v.name}</div>
+              <div style={{ padding: '10px 0' }}>{v.name}</div>
             </Col>
           </Row>
         </div>

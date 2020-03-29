@@ -41,23 +41,28 @@ const Chat = () => {
 
   return (
     <div className="App">
-      <div>聊天室</div>
-      <Row>
-        <Col span={18}><ChatHistory /></Col>
-        <Col span={6}><ChatUsers /></Col>
-      </Row>
-      <Row style={{  }}>
-        <Input className="send"
-          value={message} 
-          onChange={e => dispatch(chatSetIn(['message'],e.target.value)) }
-          onKeyPress={e => e.key === 'Enter' ? send() : console.info('s') }
-        />
-        <Button type="primary"  className="send-btn" onClick={() => send() }>发送</Button>
+      <Row style={{ height: '60vh', border: '1px solid lightgrey'  }}>
+        <Col span={18}>
+          <Row style={{ height: '53vh' }}><ChatHistory /></Row>
+          <Row style={{ margin: '25px'  }}>
+            <div style={{ margin: '0 auto' }}>
+              <Input className="send"
+                value={message} 
+                onChange={e => dispatch(chatSetIn(['message'],e.target.value)) }
+                onKeyPress={e => e.key === 'Enter' ? send() : console.info('s') }
+              />
+              <Button type="primary"  className="send-btn" onClick={() => send() }>发送</Button>
+            </div>
+          </Row>
+        </Col>
+        <Col span={6} style={{ height: '60vh', borderLeft: '1px solid lightgrey' }}>
+          <ChatUsers />
+        </Col>
       </Row>
       <style jsx>
         {`
         .send{
-          width: 80%;
+            width: 400px;
             border-radius:25px;
             border: 1px solid #FEAE1B;
           }
