@@ -5,12 +5,13 @@ import ChatHistory from '../components/ChatHistory';
 import ChatUsers from '../components/ChatUsers';
 import { Input, Button, Row, Col } from 'antd'
 import { useDispatch, useSelector  } from 'react-redux'
-import { chatSetIn, addUser, delUser, updateMsg } from '../redux/modules/chat'
+import { chatSetIn, addUser, delUser, addMsg } from '../redux/modules/chat'
 
 const Chat = () => {
   const dispatch = useDispatch()
   const chat = useSelector(state => state.chat)
-  const message = chat.get('message')
+  const messageInput = chat.get('message')
+  const self = chat.get('self')
   const history = chat.get('history').toJS()
   const users = chat.get('users').toJS()
   console.info('history',history)
@@ -21,21 +22,54 @@ const Chat = () => {
   useEffect(() =>{
     connect((msg) => {
       let data  = JSON.parse(msg.data)
-      let userText = I.fromJS({id: data.cid, name:data.name, avatar: data.avatar})
-      let msgText = I.fromJS(data)
-      if(data.type === 2) {
-          dispatch(addUser(userText))
-      } else if(data.type === 3) {
-          dispatch(delUser(userText))
-      } else {
-        dispatch(updateMsg(msgText))
+      let userText = {}
+      userText[data.cid] = {cid: data.cid, name:data.name, avatar: data.avatar}
+      userText = I.fromJS(userText)
+      //userText.set('key', userText.get('id'))
+      console.info( "New status:",userText.toJS())
+
+      
+      if(data.message === "Login..." && chat.getIn(['self','cid']) === '' ) {
+        dispatch(chatSetIn(['self', 'cid'], data.cid))
+        dispatch(chatSetIn(['self','name'], data.name))
+        dispatch(chatSetIn(['self','avatar'], data.avatar))
+        dispatch(addUser(userText))
+
+        let msgText = { }
+        msgText[data.cid] = { mid: data.cid, body: data }
+        msgText = I.fromJS(msgText)
+        console.info("New come in:", msgText.toJS())
+        dispatch(addMsg(msgText))
+      }
+      if(data.message === "Logout..." && chat.getIn(['self','cid']) != '' ) {
+        dispatch(chatSetIn(['self', 'cid'], ''))
+        dispatch(chatSetIn(['self','name'], ''))
+        dispatch(chatSetIn(['self','avatar'], ''))
+        dispatch(delUser(data.cid))
+
+        let msgText = { }
+        msgText[data.cid] = { mid: data.cid, body: data }
+        msgText = I.fromJS(msgText)
+        console.info("New come in:", msgText.toJS())
+        dispatch(addMsg(msgText))
+
+      }
+      if(data.type === 1){
+        let msgText = { }
+        msgText[data.mid] = data
+        msgText = I.fromJS(msgText)
+
+        dispatch(addMsg(msgText))
       }
       //setChatHistory([...chatHistory, msg])
     });
   })
 
   const send = () => {
-    sendMsg(message);
+    let data = self.toJS()
+    data.message = messageInput
+    data.created_at = null
+    sendMsg(JSON.stringify(data));
     dispatch(chatSetIn(['message'],''))
   }
 
@@ -43,11 +77,11 @@ const Chat = () => {
     <div className="App">
       <Row style={{ height: '60vh', border: '1px solid lightgrey'  }}>
         <Col span={18}>
-          <Row style={{ height: '53vh' }}><ChatHistory /></Row>
+          <Row style={{ height: '53vh', margin: '0 10px' }}><ChatHistory /></Row>
           <Row style={{ margin: '25px'  }}>
             <div style={{ margin: '0 auto' }}>
               <Input className="send"
-                value={message} 
+                value={messageInput} 
                 onChange={e => dispatch(chatSetIn(['message'],e.target.value)) }
                 onKeyPress={e => e.key === 'Enter' ? send() : console.info('s') }
               />
@@ -62,7 +96,7 @@ const Chat = () => {
       <style jsx>
         {`
         .send{
-            width: 400px;
+            width: 300px;
             border-radius:25px;
             border: 1px solid #FEAE1B;
           }

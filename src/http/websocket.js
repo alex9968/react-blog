@@ -1,4 +1,4 @@
-var socket = new WebSocket("ws://localhost:8894/message");
+var socket = new WebSocket("ws://192.168.3.15:8894/message");
 
 let connect = cb => {
     console.log("connecting");

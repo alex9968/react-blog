@@ -6,14 +6,19 @@ export const MESSAGES_SET_IN = 'MESSAGES_SET_IN'
 export const MESSAGE_SET = 'MESSAGE_SET'
 export const MESSAGES_CONCAT = 'MESSAGES_CONCAT'
 
-export const UPDAT_MSG = 'UPDAT_MSG'
+export const ADD_MSG = 'ADD_MSG'
 export const ADD_USER = 'ADD_USER'
 export const DEL_USER = 'DEL_USER '
 
 const initialState = I.fromJS({
   message: '',
-  history: [],
-  users: []
+  self:{
+    cid: '',
+    name: '',
+    avatar: ''
+  },
+  history: {},
+  users: {}
 })
 
 export default immutableHandler((m = initialState, action) => {
@@ -27,13 +32,14 @@ export default immutableHandler((m = initialState, action) => {
       return m.concat(value)
     case MESSAGES_SET_IN:
       return m.setIn(path, value)
-    case UPDAT_MSG:
-      return m.setIn(['history'], m.get('history').push(value))
 
+    case ADD_MSG:
+      return m.mergeIn(['history'], value)
+      //return m.setIn(['history'], m.get('history').push(value))
     case ADD_USER:
-      return m.setIn(['users'], m.get('users').push(value))
-        case DEL_USER:
-      return m.setIn(['users'], m.get('users').delete(value))
+      return m.mergeIn(['users'], value)
+    case DEL_USER:
+      return m.deleteIn(['users',id ])
 
     default:
       return m
@@ -50,6 +56,7 @@ export const chatSetIn = (path, value) => ({
 export const messagesConcat = value => ({ type: MESSAGES_CONCAT, value })
 
 export const addUser = value => ({ type: ADD_USER, value })
-export const delUser = value => ({ type: ADD_USER, value })
-export const updateMsg = value => ({ type: UPDAT_MSG, value })
+export const delUser = id => ({ type: ADD_USER, id })
+export const addMsg = value => ({ type: ADD_MSG, value })
+
 

@@ -1,6 +1,6 @@
 import fetch from 'isomorphic-unfetch'
 import queryString from 'query-string'
-const dns={API_ROOT:'http://localhost:8000'}
+const dns={API_ROOT:'http://192.168.3.15:8000'}
 
 const R = {
   headers() {
