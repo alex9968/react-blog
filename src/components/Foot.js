@@ -7,7 +7,7 @@ import { grey   } from '@ant-design/colors'
 class Foot extends React.Component{
   render(){
     return(
-      <Layout.Footer  style={{ textAlign: 'center' ,background:'#fff', fontSize: '14px' }}>
+      <Layout.Footer  style={{ textAlign: 'center' ,background:'#ebebeb', fontSize: '14px' }}>
         <Row>
           <Col md={24} className="TA-C">
             <a href="http://www.beian.gov.cn/portal" style={{ color: 'grey' }}>

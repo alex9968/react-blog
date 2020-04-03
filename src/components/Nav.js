@@ -1,23 +1,23 @@
 import React from 'react'
-import { Row, Col, Menu, Dropdown } from 'antd'
+import { Row, Col } from 'antd'
 import {  BrowserRouter as Router, Link } from 'react-router-dom';
 
 const Nav = () => {
   const defaultMenus = [
-    { href: '/', label: 'HOME' },
-    { href: '/project', label: 'PROJECTS' },
-    { href: '/chat', label: 'CHAT-ROOM' },
-    { href: '/about', label:'ABOUT'}
+    { href: '/', label: '首页' },
+    { href: '/project', label: '归档' },
+    { href: '/chat', label: '聊天室' },
+    //{ href: '/about', label:'关于'}
   ]
 
   return (
     <div>
       <nav >
-        <Row type="flex" justfiy="center" style={{ lineHeight: '12vh', backgroundColor: '#fff' }}>
+        <Row type="flex" justfiy="center" style={{ lineHeight: '5vh', backgroundColor: '#fff', marginTop: '10px' }}>
           <Col xs={{span: 16,push:4}} md={{ span:10, push:2 }} lg={{ span: 8, push:5 }}  xl={{ span: 7,push:6 }}>
             <Row>
-              <Link to="/" style={{ color: 'black', fontSize: '30px', lineHeight: '100px', marginTop: '40px' }} >
-                <div style={{ lineHeight: '60px' }} className="title FS-16 ML-8"  onClick={() => console.info("shi") }>AlenZhang's Blog</div>
+              <Link to="/" style={{ color: 'black', fontSize: '30px', lineHeight: '100px'  }} >
+                <div style={{ lineHeight: '60px' }} className="title FS-16 ML-8"  onClick={() => console.info("shi") }>AlenZhang的博客</div>
                 <div style={{ lineHeight: '30px', fontSize: '12px',color: 'grey' }}>Web工程师/全栈开发 -- 专注互联网技术，相信代码改变世界</div>
               </Link>
             </Row>
@@ -37,7 +37,9 @@ const Nav = () => {
         {`
           .title:hover{
             color: grey;
+            text-shadow:6px 6px 18px #333333;
           }
+
           .title{
             text-decoration: none;
             cursor:pointer;
@@ -53,6 +55,8 @@ const Nav = () => {
           }
           .nav {
             padding-left: 0;
+            font-size: 16px;
+            font-family: "Helvetica Neue",sans-serif;
             margin-bottom: 0;
             list-style: none;
           }
@@ -67,6 +71,8 @@ const Nav = () => {
           .nav .open a,
           .nav li a:hover,
           .nav li a:focus {
+            color: grey;
+            text-shadow:6px 6px 18px #333333;
             text-decoration: none;
             background-color: transparent;
           }
@@ -97,11 +103,6 @@ const Nav = () => {
             height: 1px;
             left: 0;
           }
-          .underline:hover::after {
-            transform: scale(1);
-            transform-origin: left;
-          }
-
           `}
       </style>
     </div>

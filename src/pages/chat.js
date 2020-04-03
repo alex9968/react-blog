@@ -29,19 +29,34 @@ const Chat = () => {
       console.info( "New status:",userText.toJS())
 
       
-      if(data.message === "Login..." && chat.getIn(['self','cid']) === '' ) {
-        dispatch(chatSetIn(['self', 'cid'], data.cid))
-        dispatch(chatSetIn(['self','name'], data.name))
-        dispatch(chatSetIn(['self','avatar'], data.avatar))
-        dispatch(addUser(userText))
+      if(data.message === "Login..."){
+        if (chat.getIn(['self','cid']) === '') { //自己登录
+          dispatch(chatSetIn(['self', 'cid'], data.cid))
+          dispatch(chatSetIn(['self','name'], data.name))
+          dispatch(chatSetIn(['self','avatar'], data.avatar))
+          console.info("Add new user::", userText.toJS())
+          dispatch(addUser(userText))
 
-        let msgText = { }
-        msgText[data.cid] = { mid: data.cid, body: data }
-        msgText = I.fromJS(msgText)
-        console.info("New come in:", msgText.toJS())
-        dispatch(addMsg(msgText))
+          let msgText = { }
+          msgText[data.cid] = { mid: data.cid, body: data }
+          msgText = I.fromJS(msgText)
+          console.info("Add new hello:", msgText.toJS())
+          dispatch(addMsg(msgText))
+        } else{ //别人登录
+          console.log("有人登录了")
+          dispatch(addUser(userText))
+
+          let msgText = { }
+          msgText[data.cid] = { mid: data.cid, body: data }
+          msgText = I.fromJS(msgText)
+          console.info("Add new hello:", msgText.toJS())
+          dispatch(addMsg(msgText))
+        }
       }
-      if(data.message === "Logout..." && chat.getIn(['self','cid']) != '' ) {
+
+      //用户退出
+      if(data.message === "Logout..." ) {
+        if(chat.getIn(['self','cid']) === data.cid)//自己退出
         dispatch(chatSetIn(['self', 'cid'], ''))
         dispatch(chatSetIn(['self','name'], ''))
         dispatch(chatSetIn(['self','avatar'], ''))
@@ -50,10 +65,20 @@ const Chat = () => {
         let msgText = { }
         msgText[data.cid] = { mid: data.cid, body: data }
         msgText = I.fromJS(msgText)
-        console.info("New come in:", msgText.toJS())
+        console.info("New come out:", msgText.toJS())
         dispatch(addMsg(msgText))
+      } else {     //别人退出
+        console.log("有人退出了")
+        dispatch(delUser(data.cid))
 
+        let msgText = { }
+        msgText[data.cid] = { mid: data.cid, body: data }
+        msgText = I.fromJS(msgText)
+        console.info("New come out:", msgText.toJS())
+        dispatch(addMsg(msgText))
       }
+
+      //普通消息
       if(data.type === 1){
         let msgText = { }
         msgText[data.mid] = data

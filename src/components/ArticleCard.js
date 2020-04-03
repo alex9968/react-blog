@@ -8,36 +8,40 @@ const ArticleCard =({data}) => {
   const {id, text, title,created_at, tags} = data;
   return (
     <div className="main">
-      <Link to={{ pathname: `/article/${id}` , query : {   } }}>
-        <Row><h2 className="font">{title}</h2></Row>
-        <Row>
-          <Col span={4}>
-            <span style={{ color: 'grey' }}>{getDay(created_at)}</span>
-          </Col>
-          <Col span={20}>
-            {tags.split(",").map( v => <Tag key={v} data={v} /> )}
-          </Col>
-        </Row>
-        <Row style={{ marginTop: '10px' }}><p className="info">{text}</p></Row>
-        <style jsx>
-          {`
+      <Row justify="space-between" align="middle">
+        <Col span={20}>
+          <Link to={{ pathname: `/article/${id}` , query : {   } }}>
+            <Row><h2 className="font">{title}</h2></Row>
+          </Link>
+        </Col>
+        <Col span={4}>
+          <span style={{ color: 'grey', textAlign:"right" }}>{getDay(created_at)}</span>
+        </Col>
+      </Row>
+      <Row style={{ marginTop: '10px' }}><p className="info">{text}</p></Row>
+
+      <Row>
+        {tags.split(",").map( v => <Tag key={v} data={v} /> )}
+      </Row>
+
+      <style jsx>
+        {`
         .main {
           border-bottom: 1px solid lightgrey;
           background-color: #fff;
-          padding: 20px 20px;
-          margin: 1px 0px 0px 0px;
+          padding: 20px;
+          margin-bottom: 20px;
+          -moz-border-radius:1em; -webkit-border-radius:1em; border-radius:1em;
         }
         .font{
           font-family: "Iowan Old Style", "Ovo", "Hoefler Text", Georgia, "Times New Roman", "TIBch", "Source Han Sans", "PingFangSC-Regular", "Hiragino Sans GB", "STHeiti", "Microsoft Yahei", "Droid Sans Fallback", "WenQuanYi Micro Hei", sans-serif;
           font-size: 22px;
-
         }
-        .main:hover{
-          border-bottom: 2px solid transparent;
-          border-top: 2px solid transparent;
-          box-shadow: 0 3px 15px rgba(0,0,0,.2)
 
+        .font:hover{
+            text-shadow:6px 6px 18px #eefeee;
         }
+
         @media screen and (max-width: 2000px) {
           .info{
           }
@@ -49,8 +53,7 @@ const ArticleCard =({data}) => {
           }
         }
         `}
-        </style>
-      </Link>
+      </style>
     </div>
   )
 }
