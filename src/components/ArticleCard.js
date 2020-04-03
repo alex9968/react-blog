@@ -5,7 +5,7 @@ import { getDay } from '../utils/time'
 import Tag from './Tag'
 
 const ArticleCard =({data}) => {
-  const {id, text, title,created_at, tags} = data;
+  const {id, notice, title,created_at, tags} = data;
   return (
     <div className="main">
       <Row justify="space-between" align="middle">
@@ -18,7 +18,7 @@ const ArticleCard =({data}) => {
           <span style={{ color: 'grey', textAlign:"right" }}>{getDay(created_at)}</span>
         </Col>
       </Row>
-      <Row style={{ marginTop: '10px' }}><p className="info">{text}</p></Row>
+      <Row style={{ marginTop: '10px' }}><p className="info">{notice}</p></Row>
 
       <Row>
         {tags.split(",").map( v => <Tag key={v} data={v} /> )}
@@ -31,7 +31,6 @@ const ArticleCard =({data}) => {
           background-color: #fff;
           padding: 20px;
           margin-bottom: 20px;
-          -moz-border-radius:1em; -webkit-border-radius:1em; border-radius:1em;
         }
         .font{
           font-family: "Iowan Old Style", "Ovo", "Hoefler Text", Georgia, "Times New Roman", "TIBch", "Source Han Sans", "PingFangSC-Regular", "Hiragino Sans GB", "STHeiti", "Microsoft Yahei", "Droid Sans Fallback", "WenQuanYi Micro Hei", sans-serif;

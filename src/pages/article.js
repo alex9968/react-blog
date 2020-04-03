@@ -66,12 +66,10 @@ const Article = (props) =>{
   }, [id])
 
   return(
-    <div style={{background: '#ECECEC'}}>
-      <div>{title}</div>
+    <div style={{background: '#fff', padding: '40px'}}>
       <div dangerouslySetInnerHTML = {{__html: md.render(text)}}></div>
-
-    <style jsx>
-      {`
+      <style jsx>
+        {`
         @media screen and (max-width: 2000px) {
         }
 
@@ -84,39 +82,39 @@ const Article = (props) =>{
             color:#000;
           }
 
-    pre.hljs {
-      padding: 8px 2px;
-      border-radius: 5px;
-      background: #f5f2f0;
-      position: relative;
-    }
-     pre.hljs ol{
-        list-style: decimal;
-        margin: 0;
-        margin-left: 40px;
-        padding: 0;
-      }
-      pre.hljs ol li{
-        position: relative;
-        padding-left: 10px;
-      }
+        pre.hljs {
+          padding: 8px 2px;
+          border-radius: 5px;
+          background: #f5f2f0;
+          position: relative;
+        }
+         pre.hljs ol{
+            list-style: decimal;
+            margin: 0;
+            margin-left: 40px;
+            padding: 0;
+          }
+          pre.hljs ol li{
+            position: relative;
+            padding-left: 10px;
+          }
 
-      pre.hljs ol li.line-num {
-        position: absolute;
-        left: -40px;
-        top: 0;
-        width: 40px;
-        height: 100%;
-        border-right: 1px solid rgba(0, 0, 0, .66);
-      }
-      pre.hljs b.name {
-        position: absolute;
-        top: 2px;
-        right: 12px;
-        z-index: 10;
-        color: #999;
-        pointer-events: none;
-      }
+          pre.hljs ol li.line-num {
+            position: absolute;
+            left: -40px;
+            top: 0;
+            width: 40px;
+            height: 100%;
+            border-right: 1px solid rgba(0, 0, 0, .66);
+          }
+          pre.hljs b.name {
+            position: absolute;
+            top: 2px;
+            right: 12px;
+            z-index: 10;
+            color: #999;
+            pointer-events: none;
+          }
       `}
       </style>
     </div>

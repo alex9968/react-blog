@@ -3,16 +3,20 @@ import MdEditor from 'react-markdown-editor-lite'
 import MarkdownIt from 'markdown-it'
 import request from '../utils/request'
 import hljs from 'highlight.js';
-import {Button} from 'antd'
+import { Input , Button} from 'antd'
 // 注册插件（如果有的话）
 // import 'highlight.js/scss/default.scss'
 // // 引入个性化的vs2015样式
 // import 'highlight.js/styles/vs2015.css'
 // MdEditor.use(YOUR_PLUGINS_HERE);
 import 'react-markdown-editor-lite/lib/index.css';
+const { TextArea  } = Input;
 
 const Publish = (props) => {
   const [content, setContent] = useState('') 
+  const [notice, setNotice] = useState('') 
+  const [title, setTitle] = useState('') 
+  const [tags, setTags] = useState('') 
   const md = new MarkdownIt({
     html: true,
     linkify: true,
@@ -57,20 +61,14 @@ const Publish = (props) => {
     <div dangerouslySetInnerHTML = {{__html: md.render(text)}}></div>
   )
 
-
-  // const RenderHTML = ({text}) =>(
-  //   <div dangerouslySetInnerHTML = {{__html: marked(text )}}></div>
-  // )
-
   const handleEditorChange =({html, text}) => {
     console.log('handleEditorChange', html, text)
     setContent(text)
   }
 
   const publish = () =>{
-    let title='test1'
     request
-      .post('articles', { title: title, text: content, notice: 'notice', tags: 'Golang,C++'})
+      .post('articles', { title, text: content, notice,  tags})
       .then(body => {
         console.info(body)
         const { ok } = body
@@ -84,12 +82,36 @@ const Publish = (props) => {
 
   return (
     <div>
-      <Button onClick={publish}>发布</Button>
+
+      <Input addonBefore="文章标题"
+        style={{ marginBottom: '20px' }}
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+      />
+
+      <Input addonBefore="归档标签"
+        value={tags}
+        style={{ marginBottom: '20px' }}
+        placeholder="以逗号分隔..."
+        onChange={(e) => setTags(e.target.value)}
+      />
+
+      <TextArea
+        value={notice}
+        style={{ marginBottom: '20px' }}
+        onChange={(e) => setNotice(e.target.value)}
+        placeholder="文章摘要..."
+        autoSize={{ minRows: 4, maxRows: 5  }}
+      />
+
       <MdEditor
         value=""
+        style={{ height: '800px' }}
         renderHTML={(text) => <RenderHTML text={text} />}
         onChange={handleEditorChange}
       />
+
+      <div style={{ margin:'0 auto' }}><Button onClick={publish}>发布</Button></div>
       <style jsx>
         {`
           pre.hljs {

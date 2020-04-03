@@ -6,22 +6,22 @@ const  support= 'http://qiniu.dreamma.vip/support.png'
 export const Layout = (props) =>{
   return(
     <Row  style={{ minHeight: '88vh', marginTop: '2%', background: '#ebebeb' }}>
-      <Col xs={{span: 22,push:1}}  md={{span: 15, push:2}} lg={{span:14, push: 3}} xl={{ span: 12, push:4 }} style={{ margin: '20px' }} >
+      <Col xs={{span: 22,push:1}}  md={{span: 15, push:2}} lg={{span:15, push: 2}} xl={{ span: 13, push:4 }} xxl={{ span: 11, push:5 }} style={{ margin: '20px' }} >
         {props.children}
       </Col>
-      <Col xs={{span: 22,push:1}} md={{span: 5, push:2}} lg={{span:4, push: 3}} xl={{ span: 4, push:4 }} 
+      <Col xs={{span: 22,push:1}} md={{span: 5, push:2}} lg={{span:5, push: 2}} xl={{ span: 4, push:4 }} xxl={{ span: 4, push:5 }}
         style={{  }}>
-        <Row style={{ margin:'20px 0px 20px 20px', background: '#fff'}}>
+        <Row style={{ marginTop:'20px', background: '#fff'}}>
           <div style={{ textAlign: 'left',padding: '10px',marginBottom: '10px', borderBottom: '1px solid lightgrey', width:'-webkit-fill-available' }}>微信扫码支持一下</div>
           <img style={{ width:'-webkit-fill-available' }} src={support} alt="support" />
         </Row>
 
-        <Row style={{ margin:'20px 0px 20px 20px', background: '#fff'}}>
+        <Row style={{ marginTop:'20px', background: '#fff'}}>
           <div style={{ textAlign: 'left',padding: '10px',marginBottom: '10px', borderBottom: '1px solid lightgrey', width:'-webkit-fill-available' }}>最新文章</div>
           <div>shi</div>
         </Row>
 
-        <Row style={{ margin:'20px 0px 20px 20px'}}>
+        <Row style={{ marginTop:'20px', background: '#fff'}}>
           <div style={{ textAlign: 'left',padding: '10px',marginBottom: '10px', borderBottom: '1px solid lightgrey', width:'-webkit-fill-available' }}>标签分类</div>
           <div>shi</div>
         </Row>
