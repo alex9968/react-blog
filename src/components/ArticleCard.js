@@ -38,7 +38,7 @@ const ArticleCard =({data}) => {
         }
 
         .font:hover{
-            text-shadow:6px 6px 18px #eefeee;
+            color: #0f90d3;
         }
 
         @media screen and (max-width: 2000px) {

@@ -1,22 +1,23 @@
 import React from 'react'
 import { Link} from 'react-router-dom';
+import { Tag  } from 'antd'
 
-const Tag = ({data}) => {
+const Tags = ({data}) => {
 
   return(
-    <div className="tag">
+    <div className="">
       <Link to={`/sort/${data}`}>
-        <div >{data}</div>
+        <Tag color="blue">{data}</Tag>
         <style jsx>
           {`
         .tag:hover{
-          background:#CEAE1B;
+          background:#0f90d3;
         }
         .tag{
           font-size: 12px;
           display: inline-block;
           text-align:center;
-          background:#FEAE1B;
+          background: #3bb4f3;
           color: #fff;
           padding: 2px 10px;
           width:auto;
@@ -29,7 +30,7 @@ const Tag = ({data}) => {
     </div>
   )
 }
-export default Tag
+export default Tags
 //           -webkit-box-shadow:3px 4px 6px #333333;
 //           box-shadow:3px 4px 6px #333333;
 //           -moz-border-radius:1em;

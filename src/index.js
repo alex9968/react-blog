@@ -6,16 +6,16 @@ import { Switch, Redirect } from 'react-router-dom';
 import { createHashHistory  } from 'history'
 import createStore from './redux/createStore'
 
-import { Layout }  from './components/Layout';
-import Nav from './components/Nav';
-import Foot from './components/Foot';
-import Home from './pages/home';
-import Chat from './pages/chat';
-import About from './pages/about';
-import Sort from './pages/sort';
-import Project from './pages/project';
-import Article from './pages/article';
-import Publish from './pages/publish';
+import { Layout }  from 'components/Layout';
+import Nav from 'components/Nav';
+import Foot from 'components/Foot';
+import Home from 'pages/home';
+import Chat from 'pages/chat';
+import About from 'pages/about';
+import Sort from 'pages/sort';
+import Project from 'pages/project';
+import Article from 'pages/article';
+import Publish from 'pages/publish';
 import 'antd/dist/antd.css';
 const store = createStore(window.INITIAL_STATE, createHashHistory())
 window.STORE = store

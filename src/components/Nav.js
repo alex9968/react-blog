@@ -1,14 +1,22 @@
 import React from 'react'
 import { Row, Col } from 'antd'
 import {  BrowserRouter as Router, Link } from 'react-router-dom';
+import  { HomeOutlined, CommentOutlined ,UnorderedListOutlined } from '@ant-design/icons'
 
 const Nav = () => {
   const defaultMenus = [
-    { href: '/', label: '首页' },
-    { href: '/project', label: '归档' },
-    { href: '/chat', label: '聊天室' },
+    { href: '/', label: '首页', id: 1 },
+    { href: '/project', label: '归档', id: 2 },
+    { href: '/chat', label: '聊天室', id: 3 },
     //{ href: '/about', label:'关于'}
   ]
+  const Icons = ({id}) => {
+    console.info(id)
+    if(id === 1) { return <HomeOutlined/> }
+    if(id === 2) { return <UnorderedListOutlined /> }
+    if(id === 3) { return <CommentOutlined /> }
+    return null
+  }
 
   return (
     <div>
@@ -24,9 +32,9 @@ const Nav = () => {
           </Col>
           <Col xs={{span: 23,push:1}} md={{span: 12, push:2}}  lg={{ span: 10, push:5 }} xl={{ span: 7, push:6 }} >
             <ul className="nav navbar-nav">
-              {defaultMenus.map(({ href, label }) => (
+              {defaultMenus.map(({ href, label, id }) => (
                 <li className="mega-menu" key={href}>
-                  <Link to={href}  className="underline">{label}</Link>
+                  <Link to={href}  className="underline"><Icons id={id} />{ ' ' }{label}</Link>
                 </li>
               ))}
             </ul>
@@ -36,8 +44,7 @@ const Nav = () => {
       <style jsx>
         {`
           .title:hover{
-            color: grey;
-            text-shadow:6px 6px 18px #333333;
+            color: #0f90d3;
           }
 
           .title{
@@ -71,8 +78,7 @@ const Nav = () => {
           .nav .open a,
           .nav li a:hover,
           .nav li a:focus {
-            color: grey;
-            text-shadow:6px 6px 18px #333333;
+            color: #0f90d3;
             text-decoration: none;
             background-color: transparent;
           }
@@ -96,16 +102,22 @@ const Nav = () => {
             top: 70%;
             background-color: currentColor;
             transform: scale(0);
-            transition: all 0.35s;
+            transition: all 0.01s;
           }
           .underline::after {
             width: 100%;
             height: 1px;
             left: 0;
           }
+         
           `}
       </style>
     </div>
   )
 }
 export default Nav
+          // .underline:hover::after {
+          //     transform: scale(1);
+          //     transform-origin: left;
+          // }
+          //

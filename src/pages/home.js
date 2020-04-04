@@ -69,6 +69,8 @@ const Article = () =>{
         <DoubleRightOutlined style={{ fontSize: '40px', color:'#fff'}} rotate={90}/>
       </div>
 
+      {/* <img src="./imgs/alen.jpeg" /> */}
+
 
       <style global jsx>
         {`
