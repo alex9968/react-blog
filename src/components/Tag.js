@@ -5,24 +5,13 @@ import { Tag  } from 'antd'
 const Tags = ({data}) => {
 
   return(
-    <div className="">
+    <div className="tag">
       <Link to={`/sort/${data}`}>
-        <Tag color="blue">{data}</Tag>
+        <Tag className="tag" color="blue">{data}</Tag>
         <style jsx>
           {`
         .tag:hover{
-          background:#0f90d3;
-        }
-        .tag{
-          font-size: 12px;
-          display: inline-block;
-          text-align:center;
-          background: #3bb4f3;
-          color: #fff;
-          padding: 2px 10px;
-          width:auto;
-          border-radius:25px;
-          margin: 0 5px;
+          cursor: pointer;
         }
         `}
         </style>
