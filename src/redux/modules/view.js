@@ -15,6 +15,7 @@ const initialState = I.fromJS({
   chatHistory: {},
   articleDetails: {},
   articlesFindByTag: {},
+  articlesLatest: [],
   self: {},
   apiRoot: request.API_ROOT
 })

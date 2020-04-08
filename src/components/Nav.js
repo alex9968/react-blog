@@ -21,11 +21,11 @@ const Nav = () => {
   return (
     <div>
       <nav >
-        <Row type="flex" justfiy="center" style={{ lineHeight: '5vh', backgroundColor: '#fff', marginTop: '10px' }}>
+        <Row type="flex" justfiy="center" style={{ lineHeight: '6vh', backgroundColor: '#fff', marginTop: '10px' }}>
           <Col xs={{span: 16,push:4}} md={{ span:10, push:2 }} lg={{ span: 8, push:5 }}  xl={{ span: 7,push:6 }}>
             <Row>
               <Link to="/" style={{ color: 'black', fontSize: '30px', lineHeight: '100px'  }} >
-                <div style={{ lineHeight: '60px' }} className="title FS-16 ML-8"  onClick={() => console.info("shi") }>AlenZhang的博客</div>
+                <div style={{ lineHeight: '60px' }} className="title ML-8"  onClick={() => console.info("shi") }>AlenZhang的博客</div>
                 <div style={{ lineHeight: '30px', fontSize: '12px',color: 'grey' }}>Web工程师/全栈开发 -- 专注互联网技术，相信代码改变世界</div>
               </Link>
             </Row>
@@ -50,6 +50,7 @@ const Nav = () => {
           .title{
             text-decoration: none;
             cursor:pointer;
+            font-size: 30px !important;
             font-family: "Avenir Next","Avenir","Helvetica Neue",sans-serif;
           }
 
@@ -66,6 +67,7 @@ const Nav = () => {
             font-family: "Helvetica Neue",sans-serif;
             margin-bottom: 0;
             list-style: none;
+            padding-top: 30px;
           }
 
 

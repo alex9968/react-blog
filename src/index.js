@@ -11,7 +11,6 @@ import Nav from 'components/Nav';
 import Foot from 'components/Foot';
 import Home from 'pages/home';
 import Chat from 'pages/chat';
-import About from 'pages/about';
 import Sort from 'pages/sort';
 import Project from 'pages/project';
 import Article from 'pages/article';
@@ -29,7 +28,6 @@ ReactDOM.render(
         <Layout>
         <Switch>
           <Route path="/" exact component={Home} />
-          <Route path="/about" component={About} />
           <Route path="/sort/:tag" component={Sort} />
           <Route path="/project" component={Project} />
           <Route path="/article/:id" component={Article} />
