@@ -10,9 +10,9 @@ const Tags = ({data}) => {
         <Tag className="tag" color="blue">{data}</Tag>
         <style jsx>
           {`
-        .tag:hover{
-          cursor: pointer;
-        }
+          .tag:hover{
+            cursor: pointer;
+          }
         `}
         </style>
       </Link>

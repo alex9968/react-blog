@@ -16,6 +16,7 @@ const initialState = I.fromJS({
   articleDetails: {},
   articlesFindByTag: {},
   articlesLatest: [],
+  tagList: [],
   self: {},
   apiRoot: request.API_ROOT
 })

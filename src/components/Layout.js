@@ -2,11 +2,11 @@ import React from 'react'
 import { Row, Col, Input, Popover } from 'antd'
 import RightCard from './RightCard'
 import Latest from './Latest'
+import Category from './Category'
 import  { GithubOutlined, WechatOutlined, MoneyCollectOutlined } from '@ant-design/icons'
 const { Search  } = Input
-const  support = './imgs/support.png'
-const  wechat = './imgs/wechat.png'
-//const  support= 'http://qiniu.dreamma.vip/support.png'
+const  wechat = 'http://qiniu.dreamma.vip/wechat.png'
+const  support= 'http://qiniu.dreamma.vip/support.png'
 //{React.cloneElement(props.children, { })}
 export const Layout = (props) =>{
   return(
@@ -15,10 +15,12 @@ export const Layout = (props) =>{
         {props.children}
       </Col>
       <Col xs={{span: 22,push:1}} md={{span: 5, push:2}} lg={{span:5, push: 2}} xl={{ span: 4, push:4 }} xxl={{ span: 4, push:5 }}>
+        {/* 搜索框 */}
         <Row style={{ marginTop: '20px' }}>
           <Search placeholder="搜索..." size="large" onSearch={value => console.log(value)} />
         </Row>
 
+        {/* 个人资料 */}
         <RightCard>
           <div style={{ width: '-webkit-fill-available' }}>
             <div className="avatar">
@@ -50,7 +52,7 @@ export const Layout = (props) =>{
         </RightCard>
 
         <RightCard title="标签分类">
-          <div></div>
+          <Category />
         </RightCard>
 
 
