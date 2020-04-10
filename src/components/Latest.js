@@ -25,7 +25,7 @@ export default ({children, title}) => {
 
   return (
     <div>
-      <Row style={{ marginTop:'-20px', background: '#fff'}}>
+      <Row style={{ background: '#fff'}}>
         <div style={{ textAlign: 'left'}}>
           {latest.map(v =>
           <Link to={`/article/${v.id}`}>
