@@ -17,7 +17,7 @@ const Project = () => {
 
   return (
     <div>
-      Projects
+      暂未开放
     </div>
   );
 }

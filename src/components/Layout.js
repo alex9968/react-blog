@@ -31,7 +31,7 @@ export const Layout = (props) =>{
         <RightCard>
           <div style={{ width: '-webkit-fill-available' }}>
             <div className="avatar">
-              <img src="./imgs/alen.jpeg" alt="avatar" />
+              <img src="http://qiniu.dreamma.vip/alen.jpg" alt="avatar" />
             </div>
             <Row  justify="space-around" style={{ margin: '0 30px' }}>
               <Col span={4}>

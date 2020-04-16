@@ -78,7 +78,7 @@ const Article = (props) =>{
 
   return(
     <div style={{background: '#fff', padding: '30px'}}>
-      <div className="title" style={{ fontSize: '25px', textAlign: 'left'}}>
+      <div className="title2" style={{ fontSize: '25px', textAlign: 'left'}}>
         <span >{title}</span>
       </div>
       <Row style={{ margin: '10px 0 20px 0' }}>
@@ -94,7 +94,7 @@ const Article = (props) =>{
           @media screen and (max-width: 400px) {
           }
 
-          .title{
+          .title2{
             font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;
             color: #212529;
           }
