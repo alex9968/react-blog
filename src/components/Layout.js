@@ -18,7 +18,7 @@ export const Layout = (props) =>{
 
   return(
     <Row  style={{ minHeight: '88vh', background: '#ebebeb' }}>
-      <Col xs={{span: 22,push:1}}  md={{span: 15, push:2}} lg={{span:15, push: 2}} xl={{ span: 13, push:4 }} xxl={{ span: 11, push:5 }} style={{ margin: '20px' }} >
+      <Col xs={{span: 22,push:1}}  md={{span: 15, push:2}} lg={{span:15, push: 2}} xl={{ span: 13, push:4 }} xxl={{ span: 11, push:5 }} style={{ margin: '20px 20px 0 0' }} >
         {props.children}
       </Col>
       <Col xs={{span: 22,push:1}} md={{span: 5, push:2}} lg={{span:5, push: 2}} xl={{ span: 4, push:4 }} xxl={{ span: 4, push:5 }}>
