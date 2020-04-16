@@ -3,61 +3,53 @@ import { useDispatch, useSelector } from 'react-redux'
 import { articlesSet, articlesMerge } from '../redux/modules/articles'
 import request from '../utils/request'
 import ArticleCard from '../components/ArticleCard';
-import { Row, message, Skeleton} from 'antd'
-import {  DoubleRightOutlined } from '@ant-design/icons'
-
-// import I from 'immutable'
-// import _ from 'lodash'
-
+import { Row, message, Skeleton, Pagination} from 'antd'
 
 const Article = () =>{
   const [loading, setLoading] = useState(true)
-  const [page, setPage] = useState(1)
+  const [pagenum, setPagenum] = useState(1)
+  const [total, setTotal] = useState(0)
   const dispatch = useDispatch()
   const articles = useSelector(state => state.articles)
+  const query = useSelector(state => state.view).get('searchQuery')
 
-  useEffect( () => {
-    request.get('articles/1')
+  useEffect(() => {
+    request.get('articles', { pagenum, pagesize: 5, query })
       .then(body => {
-        const { data, ok } = body
+        const { data, ok, total } = body
         console.info(body)
         if (ok) {
           //dispatch(articlesSet(I.fromJS(_.keyBy(data || [], 'id'))))
           dispatch(articlesSet(data))
           setLoading(false)
+          setTotal(total)
         }
       })
-  }, [dispatch])
+      .catch(e => console.log(e))
+  }, [dispatch, pagenum, query])
 
-  const getMore = () =>{
-    console.info('nextPage:', page)
-    request.get(`articles/${page + 1}`)
-      .then(body => {
-        const { data, ok } = body
-        console.info(body)
-        if(data.length === 0) {
-          message.warn("没有更多了！")
-        }
-        if (ok) {
-          //dispatch(articlesSet(I.fromJS(_.keyBy(data || [], 'id'))))
-          dispatch(articlesMerge(data))
-          setLoading(false)
-        }
-      })
-    setPage(page + 1)
-  }
 
   const articleList = articles
-    //.map(user => user.set('key', user.get('id')))
     .toList()
     .toJS()
     .sort((a, b) => (a.created_at > b.created_at ? -1 : 1))
+  //.map(user => user.set('key', user.get('id')))
 
   console.info(articleList )
 
+  const pageChange = (pagenum) => {
+    console.log("page", pagenum)
+    setPagenum(pagenum)
+  }
+
   return(
     <div style={{background: '#ECECEC'}}>
-      { loading ? (<Row style={{ padding: '0% 8% 0 12%' }}><Skeleton  avatar active paragraph={{ rows: 6}} /></Row>) : (
+      { loading ? (
+        <Row style={{ padding: '0% 8% 0 12%' }}>
+          <Skeleton  avatar active paragraph={{ rows: 6}} />
+          <Skeleton  avatar active paragraph={{ rows: 6}} />
+          <Skeleton  avatar active paragraph={{ rows: 6}} />
+        </Row>) : (
         <div style={{ textAlign: 'left'}}>
           {articleList.map(
             v => <ArticleCard key={v.id}  data={v} />
@@ -65,14 +57,18 @@ const Article = () =>{
         </div>
       )}
 
-      <div style={{ textAlign:'center', margin: '10px auto' }}  onClick={getMore} >
-        <DoubleRightOutlined style={{ fontSize: '40px', color:'#fff'}} rotate={90}/>
+      <div style={{ textAlign: 'center'}}>
+        <Pagination
+          style={{ display: 'inline-block' }}
+          total={total}
+          showQuickJumper
+          pageSize={5}
+          defaultCurrent={1}
+          onChange={pageChange}
+        />
       </div>
 
-      {/* <img src="./imgs/alen.jpeg" /> */}
-
-
-      <style global jsx>
+      <style jsx>
         {`
         @media screen and (max-width: 2000px) {
         }

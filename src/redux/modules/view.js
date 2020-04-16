@@ -18,6 +18,7 @@ const initialState = I.fromJS({
   articlesLatest: [],
   tagList: [],
   self: {},
+  searchQuery: '',
   apiRoot: request.API_ROOT
 })
 export default function(aView = initialState, action) {

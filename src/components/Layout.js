@@ -1,14 +1,21 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
 import { Row, Col, Input, Popover } from 'antd'
 import RightCard from './RightCard'
 import Latest from './Latest'
 import Category from './Category'
+import { viewSetIn } from '../redux/modules/view'
 import  { GithubOutlined, WechatOutlined, MoneyCollectOutlined } from '@ant-design/icons'
 const { Search  } = Input
 const  wechat = 'http://qiniu.dreamma.vip/wechat.png'
 const  support= 'http://qiniu.dreamma.vip/support.png'
 //{React.cloneElement(props.children, { })}
 export const Layout = (props) =>{
+  const dispatch = useDispatch()
+  const setSearchText = (text) => {
+    dispatch(viewSetIn(['searchQuery'], text))
+  }
+
   return(
     <Row  style={{ minHeight: '88vh', background: '#ebebeb' }}>
       <Col xs={{span: 22,push:1}}  md={{span: 15, push:2}} lg={{span:15, push: 2}} xl={{ span: 13, push:4 }} xxl={{ span: 11, push:5 }} style={{ margin: '20px' }} >
@@ -17,7 +24,7 @@ export const Layout = (props) =>{
       <Col xs={{span: 22,push:1}} md={{span: 5, push:2}} lg={{span:5, push: 2}} xl={{ span: 4, push:4 }} xxl={{ span: 4, push:5 }}>
         {/* 搜索框 */}
         <Row style={{ marginTop: '20px' }}>
-          <Search placeholder="搜索..." size="large" onSearch={value => console.log(value)} />
+          <Search placeholder="搜索..." size="large" onSearch={value => setSearchText(value)} />
         </Row>
 
         {/* 个人资料 */}
