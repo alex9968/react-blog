@@ -2,6 +2,12 @@ import React, { useState, useEffect } from 'react'
 import MarkdownIt from 'markdown-it'
 import request from '../utils/request'
 import hljs from 'highlight.js';
+import { Row, Col } from 'antd'
+import { getDay } from '../utils/time'
+import Tag from '../components/Tag'
+
+
+
 import 'highlight.js/styles/atelier-plateau-light.css';
 // import 'highlight.js/scss/default.scss'
 // // 引入个性化的vs2015样式
@@ -13,7 +19,9 @@ const Article = (props) =>{
   const { id } = props.match.params;
   console.info(props)
   const [title, setTitle]= useState('')
+  const [tags, setTags]= useState('')
   const [text, setText]= useState('')
+  const [date, setDate]= useState('')
 
   const md = new MarkdownIt({
     html: true,
@@ -62,12 +70,22 @@ const Article = (props) =>{
         if (ok) {
           setTitle(data.title)
           setText(data.text)
+          setTags(data.tags)
+          setDate(data.created_at)
         }
       })
   }, [id])
 
   return(
-    <div style={{background: '#fff', padding: '40px'}}>
+    <div style={{background: '#fff', padding: '30px'}}>
+      <div style={{ fontSize: '25px', textAlign: 'left'}}>
+        <span>{title}</span>
+      </div>
+      <Row style={{ margin: '10px 0 20px 0' }}>
+        {tags.split(",").map( v => <Tag key={v} data={v} /> )}
+        <span style={{ color: '#6c757d!important', textAlign:"right" }}>更新于{getDay(date)}</span>
+      </Row>
+
       <div dangerouslySetInnerHTML = {{__html: md.render(text)}}></div>
       <style jsx>
         {`
