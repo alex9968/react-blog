@@ -78,23 +78,26 @@ const Article = (props) =>{
 
   return(
     <div style={{background: '#fff', padding: '30px'}}>
-      <div style={{ fontSize: '25px', textAlign: 'left'}}>
-        <span>{title}</span>
+      <div className="title" style={{ fontSize: '25px', textAlign: 'left'}}>
+        <span >{title}</span>
       </div>
       <Row style={{ margin: '10px 0 20px 0' }}>
         {tags.split(",").map( v => <Tag key={v} data={v} /> )}
-        <span style={{ color: '#6c757d!important', textAlign:"right" }}>更新于{getDay(date)}</span>
+        <span style={{ color: '#6c757d!important', textAlign:"right" }}>更新于&nbsp; {getDay(date)}</span>
       </Row>
 
       <div dangerouslySetInnerHTML = {{__html: md.render(text)}}></div>
       <style jsx>
         {`
-        @media screen and (max-width: 2000px) {
-        }
+          @media screen and (max-width: 2000px) {
+          }
+          @media screen and (max-width: 400px) {
+          }
 
-        @media screen and (max-width: 400px) {
-
-        }
+          .title{
+            font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;
+            color: #212529;
+          }
          .card-row{
             font-size: 60px;
             margin-bottom: 30px;
