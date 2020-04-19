@@ -21,7 +21,7 @@ const Nav = () => {
   return (
     <div>
       <nav >
-        <Row type="flex" justfiy="center" style={{ lineHeight: '6vh', backgroundColor: '#fff', marginTop: '10px' }}>
+        <Row type="flex" justfiy="center" style={{ lineHeight: '6vh', backgroundColor: '#fffffd', marginTop: '10px' }}>
           <Col xs={{span: 16,push:4}} md={{ span:10, push:2 }} lg={{ span: 8, push:5 }}  xl={{ span: 7,push:6 }}>
             <Row>
               <Link to="/" style={{ color: 'black', fontSize: '30px', lineHeight: '100px'  }} >

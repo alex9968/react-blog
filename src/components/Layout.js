@@ -23,8 +23,8 @@ export const Layout = (props) =>{
       </Col>
       <Col xs={{span: 22,push:1}} md={{span: 5, push:2}} lg={{span:5, push: 2}} xl={{ span: 4, push:4 }} xxl={{ span: 4, push:5 }}>
         {/* 搜索框 */}
-        <Row style={{ marginTop: '20px' }}>
-          <Search placeholder="搜索..." size="large" onSearch={value => setSearchText(value)} />
+        <Row style={{ marginTop:'20px' }}>
+          <Search style={{ background: '#fffffd', borderRadius: '5px' }} placeholder="搜索..." size="large" onSearch={value => setSearchText(value)} />
         </Row>
 
         {/* 个人资料 */}

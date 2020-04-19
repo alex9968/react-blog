@@ -4,7 +4,7 @@ import { Row } from 'antd'
 export default ({children, title}) => {
   return (
     <div>
-      <Row style={{ marginTop:'20px', background: '#fff'}}>
+      <Row style={{ marginTop:'10px', background: '#fffffd', borderRadius: '5px' }}>
         { title ? (
           <div style={{ textAlign: 'left',margin: '10px 20px',  paddingBottom: '10px', borderBottom: '1px solid lightgrey', width:'-webkit-fill-available' }}>
             <b>{title}</b>

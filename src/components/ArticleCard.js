@@ -28,9 +28,10 @@ const ArticleCard =({data}) => {
         {`
         .main {
           border-bottom: 1px solid lightgrey;
-          background-color: #fff;
+          background-color: #fffffd;
           padding: 20px;
-          margin-bottom: 20px;
+          margin-bottom: 10px;
+          border-radius: 5px;
         }
         .font{
           font-family: "Iowan Old Style", "Ovo", "Hoefler Text", Georgia, "Times New Roman", "TIBch", "Source Han Sans", "PingFangSC-Regular", "Hiragino Sans GB", "STHeiti", "Microsoft Yahei", "Droid Sans Fallback", "WenQuanYi Micro Hei", sans-serif;
