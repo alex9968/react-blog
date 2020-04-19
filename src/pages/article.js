@@ -5,6 +5,8 @@ import hljs from 'highlight.js';
 import { Row, Col } from 'antd'
 import { getDay } from '../utils/time'
 import Tag from '../components/Tag'
+import MarkdownTable from 'markdown-it-multimd-table'
+
 
 
 
@@ -23,44 +25,69 @@ const Article = (props) =>{
   const [text, setText]= useState('')
   const [date, setDate]= useState('')
 
-  const md = new MarkdownIt({
-    html: true,
-    linkify: true,
-    typographer: true,
+  // const md = new MarkdownIt({
+  //   html: true,
+  //   linkify: true,
+  //   typographer: true,
+  //   highlight: function (str, lang) {
+  //     if (lang && hljs.getLanguage(lang)) {
+  //       try {
+  //         // 得到经过highlight.js之后的html代码
+  //         const preCode = hljs.highlight(lang, str, true).value
+  //         // 以换行进行分割
+  //         const lines = preCode.split(/\n/).slice(0, -1)
+  //         // 添加自定义行号
+  //         let html = lines.map((item, index) => {
+  //           // return '<li><span class="line-num" data-line="' + (index + 1) + '"></span>' + item + '</li>'
+  //           return '<div><span class="line-num" data-line="' + (index + 1) + '"></span>' + item + '</div>'
+  //         }).join('')
+  //         html = '<ol>' + html + '</ol>'
+  //         // 添加代码语言
+  //         if (lines.length) {
+  //           html += '<b class="name">' + lang + '</b>'
+  //         }
+  //         return '<pre class="hljs"><code>' +
+  //           html +
+  //           '</code></pre>'
+  //       } catch (__) {}
+  //     }
+  //     // 未添加代码语言，此处与上面同理
+  //     const preCode = md.utils.escapeHtml(str)
+  //     const lines = preCode.split(/\n/).slice(0, -1)
+  //     let html = lines.map((item, index) => {
+  //       return '<li><span class="line-num" data-line="' + (index + 1) + '"></span>' + item + '</li>'
+  //     }).join('')
+  //     html = '<ol>' + html + '</ol>'
+  //     return '<pre class="hljs"><code>' +
+  //       html +
+  //       '</code></pre>'
+  //   }
+  // })
+
+  
+    // const md = require('markdown-it')()
+  //   .use(require('markdown-it-multimd-table'), {
+  //     multiline:  false,
+  //     rowspan:    false,
+  //     headerless: false,
+  //
+  //   });
+
+  const md = require('markdown-it')({
     highlight: function (str, lang) {
       if (lang && hljs.getLanguage(lang)) {
         try {
-          // 得到经过highlight.js之后的html代码
-          const preCode = hljs.highlight(lang, str, true).value
-          // 以换行进行分割
-          const lines = preCode.split(/\n/).slice(0, -1)
-          // 添加自定义行号
-          let html = lines.map((item, index) => {
-            // return '<li><span class="line-num" data-line="' + (index + 1) + '"></span>' + item + '</li>'
-            return '<div><span class="line-num" data-line="' + (index + 1) + '"></span>' + item + '</div>'
-          }).join('')
-          html = '<ol>' + html + '</ol>'
-          // 添加代码语言
-          if (lines.length) {
-            html += '<b class="name">' + lang + '</b>'
-          }
           return '<pre class="hljs"><code>' +
-            html +
-            '</code></pre>'
+            hljs.highlight(lang, str, true).value +
+            '</code></pre>';
         } catch (__) {}
       }
-      // 未添加代码语言，此处与上面同理
-      const preCode = md.utils.escapeHtml(str)
-      const lines = preCode.split(/\n/).slice(0, -1)
-      let html = lines.map((item, index) => {
-        return '<li><span class="line-num" data-line="' + (index + 1) + '"></span>' + item + '</li>'
-      }).join('')
-      html = '<ol>' + html + '</ol>'
-      return '<pre class="hljs"><code>' +
-        html +
-        '</code></pre>'
+      return '<pre class="hljs"><code>' + md.utils.escapeHtml(str) + '</code></pre>';
     }
-  })
+  }).use(require('markdown-it-multimd-table'));
+
+
+
 
   useEffect( () => {
     request.get(`articles/find_by_id/${id}`)
@@ -77,7 +104,7 @@ const Article = (props) =>{
   }, [id])
 
   return(
-    <div style={{background: '#fff', padding: '30px'}}>
+    <div style={{background: '#fff', padding: '30px', borderRadius: '5px'}}>
       <div className="title2" style={{ fontSize: '25px', textAlign: 'left'}}>
         <span >{title}</span>
       </div>
