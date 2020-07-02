@@ -1,21 +1,14 @@
 import React, { useState, useEffect } from 'react'
-import MarkdownIt from 'markdown-it'
 import request from '../utils/request'
 import hljs from 'highlight.js';
 import { Row, Col } from 'antd'
 import { getDay } from '../utils/time'
 import Tag from '../components/Tag'
-import MarkdownTable from 'markdown-it-multimd-table'
-
-
-
 
 import 'highlight.js/styles/atelier-plateau-light.css';
 // import 'highlight.js/scss/default.scss'
 // // 引入个性化的vs2015样式
 // import 'highlight.js/styles/vs2015.css'
-
-
 
 const Article = (props) =>{
   const { id } = props.match.params;
@@ -24,54 +17,6 @@ const Article = (props) =>{
   const [tags, setTags]= useState('')
   const [text, setText]= useState('')
   const [date, setDate]= useState('')
-
-  // const md = new MarkdownIt({
-  //   html: true,
-  //   linkify: true,
-  //   typographer: true,
-  //   highlight: function (str, lang) {
-  //     if (lang && hljs.getLanguage(lang)) {
-  //       try {
-  //         // 得到经过highlight.js之后的html代码
-  //         const preCode = hljs.highlight(lang, str, true).value
-  //         // 以换行进行分割
-  //         const lines = preCode.split(/\n/).slice(0, -1)
-  //         // 添加自定义行号
-  //         let html = lines.map((item, index) => {
-  //           // return '<li><span class="line-num" data-line="' + (index + 1) + '"></span>' + item + '</li>'
-  //           return '<div><span class="line-num" data-line="' + (index + 1) + '"></span>' + item + '</div>'
-  //         }).join('')
-  //         html = '<ol>' + html + '</ol>'
-  //         // 添加代码语言
-  //         if (lines.length) {
-  //           html += '<b class="name">' + lang + '</b>'
-  //         }
-  //         return '<pre class="hljs"><code>' +
-  //           html +
-  //           '</code></pre>'
-  //       } catch (__) {}
-  //     }
-  //     // 未添加代码语言，此处与上面同理
-  //     const preCode = md.utils.escapeHtml(str)
-  //     const lines = preCode.split(/\n/).slice(0, -1)
-  //     let html = lines.map((item, index) => {
-  //       return '<li><span class="line-num" data-line="' + (index + 1) + '"></span>' + item + '</li>'
-  //     }).join('')
-  //     html = '<ol>' + html + '</ol>'
-  //     return '<pre class="hljs"><code>' +
-  //       html +
-  //       '</code></pre>'
-  //   }
-  // })
-
-  
-    // const md = require('markdown-it')()
-  //   .use(require('markdown-it-multimd-table'), {
-  //     multiline:  false,
-  //     rowspan:    false,
-  //     headerless: false,
-  //
-  //   });
 
   const md = require('markdown-it')({
     highlight: function (str, lang) {
@@ -85,9 +30,6 @@ const Article = (props) =>{
       return '<pre class="hljs"><code>' + md.utils.escapeHtml(str) + '</code></pre>';
     }
   }).use(require('markdown-it-multimd-table'));
-
-
-
 
   useEffect( () => {
     request.get(`articles/find_by_id/${id}`)
