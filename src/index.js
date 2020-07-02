@@ -19,7 +19,6 @@ import 'antd/dist/antd.css';
 const store = createStore(window.INITIAL_STATE, createHashHistory())
 window.STORE = store
 
-//<Redirect path="/" exact={true} to="/index" />
 ReactDOM.render(
   <div>
     <ReduxProvider store={store}>

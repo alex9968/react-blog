@@ -3,7 +3,7 @@ import React from "react";
 // import { useDispatch, useSelector  } from 'react-redux'
 // import { viewMergeIn,viewSetIn   } from '../redux/modules/view'
 // import request from '../utils/request'
-// import ArticleCard from '../components/ArticleCard';
+import Loading from '../css-components/Loading';
 // import { articlesSet } from '../redux/modules/articles'
 
 const Project = () => {
@@ -17,6 +17,7 @@ const Project = () => {
 
   return (
     <div>
+      <Loading />
     </div>
   );
 }
