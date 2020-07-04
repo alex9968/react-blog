@@ -1,0 +1,10 @@
+.loading{
+  height: 200px;
+  width: 400px;
+  background: lightgrey;
+  &-text{
+    color: red;
+
+    font-size: 80px;
+  }
+}

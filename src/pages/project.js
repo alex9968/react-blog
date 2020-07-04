@@ -4,7 +4,7 @@ import React from "react";
 // import { viewMergeIn,viewSetIn   } from '../redux/modules/view'
 // import request from '../utils/request'
 import Loading from '../css-components/Loading';
-// import { articlesSet } from '../redux/modules/articles'
+import SearchBox from '../css-components/SearchBox';
 
 const Project = () => {
   // const dispatch = useDispatch()
@@ -18,6 +18,7 @@ const Project = () => {
   return (
     <div>
       <Loading />
+      <SearchBox />
     </div>
   );
 }

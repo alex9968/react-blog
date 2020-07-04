@@ -1,0 +1,43 @@
+.search-box {
+  position: absolute;
+  background: #2f3640;
+  height: 40px;
+  border-radius: 40px;
+  padding: 10px 5px;
+  display: flex;
+  align-items: center;
+  &-btn {
+    color: #e84118;
+    float: right;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #2f3640;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.4s;
+    text-decoration: none;
+  }
+  &-text {
+    border: none;
+    background: none;
+    outline: none;
+    float: left;
+    padding: 0;
+    color: white;
+    font-size: 16px;
+    transition: 0.4s;
+    line-height: 40px;
+    width: 0;
+  }
+  &:hover > &-text {
+    width: 240px;
+    padding: 0 6px;
+
+  }
+  &:hover > &-btn {
+    background: white;
+  }
+}
+
