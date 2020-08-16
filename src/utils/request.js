@@ -51,8 +51,8 @@ const R = {
     return json
   },
 
-  async post(path, data= {}) {
-    const params = R.body(data)
+  async post(path, param={}, data= {}) {
+    const params = R.body(param)
     const query = queryString.stringify(params)
     //console.info(`${dns.API_ROOT}/${path}?${query}`)
     const res = await fetch(`${dns.API_ROOT}/${path}?${query}`, {

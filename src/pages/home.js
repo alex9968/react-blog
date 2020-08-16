@@ -33,7 +33,7 @@ const Article = () =>{
 
   useEffect(() => {
     console.log("res,ff", window.returnCitySN, JSON.stringify( window.returnUserBrowser ) )
-    request.post('users', {
+    request.post('users',{}, {
       ...window.returnCitySN,
       browser: JSON.stringify( window.returnUserBrowser)
     })
