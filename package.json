@@ -35,7 +35,8 @@
     "react-scripts": "3.4.1",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
-    "sass-loader": "^8.0.2"
+    "sass-loader": "^8.0.2",
+    "styled-components": "^5.1.1"
   },
   "scripts": {
     "dev": "react-app-rewired start",
@@ -59,6 +60,5 @@
     ]
   },
   "proxy": "http://localhost:8000?",
-  "devDependencies": {
-  }
+  "devDependencies": {}
 }
