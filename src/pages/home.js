@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import fetch from 'isomorphic-unfetch'
 import { useDispatch, useSelector } from 'react-redux'
 import { articlesSet, articlesMerge } from '../redux/modules/articles'
 import request from '../utils/request'
@@ -12,6 +13,8 @@ const Article = () =>{
   const dispatch = useDispatch()
   const articles = useSelector(state => state.articles)
   const query = useSelector(state => state.view).get('searchQuery')
+  const [userIp] = useState(localStorage.getItem('userIp'))
+
 
   useEffect(() => {
     request.get('articles', { pagenum, pagesize: 5, query })
@@ -27,6 +30,10 @@ const Article = () =>{
       })
       .catch(e => console.log(e))
   }, [dispatch, pagenum, query])
+
+  useEffect(() => {
+    console.log("res,ff", window.returnCitySN )
+  }, [userIp])
 
 
   const articleList = articles
