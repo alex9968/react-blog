@@ -32,7 +32,14 @@ const Article = () =>{
   }, [dispatch, pagenum, query])
 
   useEffect(() => {
-    console.log("res,ff", window.returnCitySN )
+    console.log("res,ff", window.returnCitySN, JSON.stringify( window.returnUserBrowser ) )
+    request.post('users', {
+      ...window.returnCitySN,
+      browser: JSON.stringify( window.returnUserBrowser)
+    })
+      .then(res => {
+        console.log("msg", res.msg)
+      })
   }, [userIp])
 
 
