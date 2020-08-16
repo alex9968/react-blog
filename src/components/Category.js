@@ -8,21 +8,20 @@ import { Row, Col } from 'antd'
 export default () => {
   const dispatch = useDispatch()
   const tagList = useSelector(state => state.view).get('tagList').toJS()
-  console.info(tagList)
+  //console.info(tagList)
  
 
   useEffect( () => {
     request.get('articles/tags')
       .then(body => {
         const { data, ok } = body
-        console.info(body)
         if (ok) {
           let namelist = []
           let taglist = []
-          console.log(data)
+          //console.log(data)
           data.map(v => {
             v.tags.split(",").map(tag => {
-              console.log(Object.keys(taglist))
+              //console.log(Object.keys(taglist))
               if(namelist.indexOf(tag) === -1){
                 namelist.push(tag)
                 taglist.push({name: tag, count: 1})

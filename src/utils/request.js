@@ -32,7 +32,7 @@ const R = {
   async get(path, data = {}, root = null) {
     const params = R.body(data)
     const query = queryString.stringify(params)
-    console.info(`${root || dns.API_ROOT}/${path}?${query}`)
+    //console.info(`${root || dns.API_ROOT}/${path}?${query}`)
     const res = await fetch(`${root || dns.API_ROOT}/${path}?${query}`, {
       method: 'GET',
       headers: R.headers()
@@ -54,7 +54,7 @@ const R = {
   async post(path, data= {}) {
     const params = R.body(data)
     const query = queryString.stringify(params)
-    console.info(`${dns.API_ROOT}/${path}?${query}`)
+    //console.info(`${dns.API_ROOT}/${path}?${query}`)
     const res = await fetch(`${dns.API_ROOT}/${path}?${query}`, {
       method: 'POST',
       headers: R.headers(),

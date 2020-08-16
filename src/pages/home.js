@@ -20,7 +20,7 @@ const Article = () =>{
     request.get('articles', { pagenum, pagesize: 5, query })
       .then(body => {
         const { data, ok, total } = body
-        console.info(body)
+        //console.info(body)
         if (ok) {
           //dispatch(articlesSet(I.fromJS(_.keyBy(data || [], 'id'))))
           dispatch(articlesSet(data))
@@ -42,10 +42,10 @@ const Article = () =>{
     .sort((a, b) => (a.created_at > b.created_at ? -1 : 1))
   //.map(user => user.set('key', user.get('id')))
 
-  console.info(articleList )
+  //console.info(articleList )
 
   const pageChange = (pagenum) => {
-    console.log("page", pagenum)
+    //console.log("page", pagenum)
     setPagenum(pagenum)
   }
 
